@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechNova — Plataforma de Servicios Digitales</title>
+    <link href="/src/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/css/inicio.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="/src/main.js" type="module"></script>
+  </head>
+  <body>
+    <app-navbar active="inicio"></app-navbar>
+    <main class="page-container flex flex-col gap-48">
+      <section class="flex flex-col items-center text-center">
+        <span
+          class="animate-fade-down mb-8 inline-block rounded-full bg-[#F0FDF4] px-4 py-1.5 text-[0.82rem] font-semibold tracking-wide text-blue-royal"
+        >
+          ✦ Plataforma de Servicios Digitales
+        </span>
+        <h1
+          class="animate-fade-down-delay-1 font-title text-gray-cod max-w-[16ch] mb-6 text-7xl leading-[1.1] tracking-tight"
+        >
+          Soluciones tecnológicas para tu
+          <span class="italic text-blue-600">negocio</span>
+        </h1>
+        <p
+          class="animate-fade-down-delay-2 mb-10 max-w-[560px] text-lg leading-relaxed text-gray-dove"
+        >
+          Explora nuestro catálogo de servicios digitales. Desde desarrollo de
+          software hasta soporte IT, encuentra la solución perfecta para
+          impulsar tu empresa.
+        </p>
+        <div
+          class="animate-fade-down-delay-3 flex flex-wrap items-center justify-center gap-3"
+        >
+          <app-button
+            href="/pages/servicios/"
+            type="primary"
+            custom-class="px-7 py-3.5 text-[0.95rem] font-semibold shadow-[0_2px_8px_rgba(0,0,0,0.15)] ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-px hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)]"
+          >
+            Explorar servicios
+            <img src="/src/assets/icons/arrow.svg" alt="" aria-hidden="true" />
+          </app-button>
+          <app-button
+            href="/pages/contacto/"
+            type="secondary"
+            custom-class="px-7 py-3.5 text-[0.95rem] font-semibold"
+          >
+            Contactar equipo
+          </app-button>
+        </div>
+        <div
+          class="animate-fade-down-delay-4 mt-17.5 flex flex-wrap justify-center gap-8 md:gap-16"
+        >
+          <div class="flex flex-col items-center gap-1">
+            <span class="font-title text-gray-cod text-[2.4rem] tracking-tight"
+              >120+</span
+            >
+            <span
+              class="text-[0.82rem] font-medium uppercase tracking-wider text-gray-dusty"
+            >
+              Servicios
+            </span>
+          </div>
+          <div class="flex flex-col items-center gap-1">
+            <span class="font-title text-gray-cod text-[2.4rem] tracking-tight"
+              >3.2k</span
+            >
+            <span
+              class="text-[0.82rem] font-medium uppercase tracking-wider text-gray-dusty"
+            >
+              Clientes
+            </span>
+          </div>
+          <div class="flex flex-col items-center gap-1">
+            <span class="font-title text-gray-cod text-[2.4rem] tracking-tight"
+              >99.9%</span
+            >
+            <span
+              class="text-[0.82rem] font-medium uppercase tracking-wider text-gray-dusty"
+            >
+              Uptime
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="mb-12 flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <span
+              class="mb-4 inline-flex items-center gap-2 text-[0.8rem] font-semibold uppercase tracking-wider text-gray-dusty"
+            >
+              <span
+                class="h-0.5 w-5 rounded-sm bg-blue-royal"
+                aria-hidden="true"
+              ></span>
+              Catálogo
+            </span>
+            <h2
+              class="mb-3 font-title text-[clamp(2rem,4vw,2.8rem)] leading-tight tracking-tight"
+            >
+              Servicios destacados
+            </h2>
+            <p
+              class="max-w-[520px] text-[1.05rem] leading-relaxed text-gray-dove"
+            >
+              Soluciones diseñadas para resolver los desafíos tecnológicos más
+              comunes de las empresas modernas.
+            </p>
+          </div>
+          <app-button
+            href="/pages/servicios/"
+            type="secondary"
+            custom-class="px-7 py-3.5 text-[0.95rem] font-semibold"
+          >
+            Ver todos
+            <img
+              src="/src/assets/icons/arrow.svg"
+              alt=""
+              aria-hidden="true"
+              class="icon-black"
+            />
+          </app-button>
+        </div>
+        <div
+          class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+          id="services-grid"
+          aria-live="polite"
+        ></div>
+      </section>
+
+      <section
+        class="features-banner flex flex-col items-center gap-12 rounded-[20px] bg-gray-cod p-10 text-white md:flex-row md:p-16"
+      >
+        <div class="flex-1">
+          <h2
+            class="mb-4 font-title text-[2.4rem] leading-tight tracking-tight"
+          >
+            ¿Por qué elegir TechNova?
+          </h2>
+          <p class="mb-7 text-base leading-relaxed text-white/65">
+            No solo ofrecemos servicios — construimos alianzas tecnológicas a
+            largo plazo con nuestros clientes.
+          </p>
+          <app-button
+            href="/pages/nosotros/"
+            type="secondary"
+            custom-class="px-7 py-3.5 text-[0.95rem] font-semibold"
+          >
+            Conocer más
+            <img
+              src="/src/assets/icons/arrow.svg"
+              alt=""
+              aria-hidden="true"
+              class="icon-black"
+            />
+          </app-button>
+        </div>
+        <div class="flex-1 relative grid gap-4">
+          <div
+            class="flex gap-3.5 rounded-xl border border-white/[0.08] bg-white/[0.06] p-5"
+          >
+            <div
+              class="flex h-10 min-w-10 items-center justify-center rounded-[10px] bg-white/10 text-base"
+              aria-hidden="true"
+            >
+              ⚡
+            </div>
+            <div>
+              <h4 class="mb-1 text-[0.95rem] font-semibold">
+                Respuesta rápida
+              </h4>
+              <p class="text-[0.82rem] leading-snug text-white/55">
+                Tiempos de respuesta menores a 2 horas en soporte técnico.
+              </p>
+            </div>
+          </div>
+          <div
+            class="flex gap-3.5 rounded-xl border border-white/[0.08] bg-white/[0.06] p-5"
+          >
+            <div
+              class="flex h-10 min-w-10 items-center justify-center rounded-[10px] bg-white/10 text-base"
+              aria-hidden="true"
+            >
+              🔄
+            </div>
+            <div>
+              <h4 class="mb-1 text-[0.95rem] font-semibold">
+                Metodología ágil
+              </h4>
+              <p class="text-[0.82rem] leading-snug text-white/55">
+                Sprints semanales con entregables visibles y retroalimentación
+                constante.
+              </p>
+            </div>
+          </div>
+          <div
+            class="flex gap-3.5 rounded-xl border border-white/[0.08] bg-white/[0.06] p-5"
+          >
+            <div
+              class="flex h-10 min-w-10 items-center justify-center rounded-[10px] bg-white/10 text-base"
+              aria-hidden="true"
+            >
+              📈
+            </div>
+            <div>
+              <h4 class="mb-1 text-[0.95rem] font-semibold">Escalabilidad</h4>
+              <p class="text-[0.82rem] leading-snug text-white/55">
+                Arquitecturas diseñadas para crecer con tu negocio sin
+                fricciones.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="mb-12 flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <span
+              class="mb-4 inline-flex items-center gap-2 text-[0.8rem] font-semibold uppercase tracking-wider text-gray-dusty"
+            >
+              <span
+                class="h-0.5 w-5 rounded-sm bg-blue-royal"
+                aria-hidden="true"
+              ></span>
+              Testimonios
+            </span>
+            <h2
+              class="mb-3 font-['Instrument_Serif',serif] text-[clamp(2rem,4vw,2.8rem)] leading-tight tracking-tight"
+            >
+              Lo que dicen nuestros clientes
+            </h2>
+            <p
+              class="max-w-[520px] text-[1.05rem] leading-relaxed text-gray-dove"
+            >
+              Historias reales de empresas que transformaron sus procesos con
+              nuestros servicios.
+            </p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+          <div class="rounded-[20px] border border-gray-cararra bg-white p-8">
+            <div class="mb-4 text-amber-600 tracking-[2px]" aria-hidden="true">
+              ★★★★★
+            </div>
+            <blockquote
+              class="mb-6 text-[0.95rem] italic leading-relaxed text-gray-dusty"
+            >
+              "Migraron toda nuestra infraestructura a AWS en tiempo récord. El
+              soporte post-migración fue excepcional."
+            </blockquote>
+            <div class="flex items-center gap-3">
+              <div
+                class="flex h-10 w-10 items-center justify-center rounded-[10px] bg-gray-pampas text-[0.85rem] font-bold text-gray-dusty"
+              >
+                CM
+              </div>
+              <div>
+                <div class="text-sm font-semibold">Carlos Méndez</div>
+                <div class="text-[0.78rem] text-gray-dusty">
+                  CTO, DataFlow Corp
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-[20px] border border-gray-cararra bg-white p-8">
+            <div class="mb-4 text-amber-600 tracking-[2px]" aria-hidden="true">
+              ★★★★★
+            </div>
+            <blockquote
+              class="mb-6 text-[0.95rem] italic leading-relaxed text-gray-dusty"
+            >
+              "La app móvil que desarrollaron incrementó nuestras ventas un 40%
+              en el primer trimestre."
+            </blockquote>
+            <div class="flex items-center gap-3">
+              <div
+                class="flex h-10 w-10 items-center justify-center rounded-[10px] bg-gray-pampas text-[0.85rem] font-bold text-gray-dusty"
+              >
+                LR
+              </div>
+              <div>
+                <div class="text-sm font-semibold">Laura Ríos</div>
+                <div class="text-[0.78rem] text-gray-dusty">
+                  CEO, ComercioYa
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-[20px] border border-gray-cararra bg-white p-8">
+            <div class="mb-4 text-amber-600 tracking-[2px]" aria-hidden="true">
+              ★★★★★
+            </div>
+            <blockquote
+              class="mb-6 text-[0.95rem] italic leading-relaxed text-gray-dusty"
+            >
+              "Su equipo de ciberseguridad detectó vulnerabilidades que otros 3
+              proveedores no encontraron."
+            </blockquote>
+            <div class="flex items-center gap-3">
+              <div
+                class="flex h-10 w-10 items-center justify-center rounded-[10px] bg-gray-pampas text-[0.85rem] font-bold text-gray-dusty"
+              >
+                JP
+              </div>
+              <div>
+                <div class="text-sm font-semibold">Jorge Patiño</div>
+                <div class="text-[0.78rem] text-[#9B9B9B]">
+                  Director TI, FinServ
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="px-8 py-8 text-center">
+        <h2
+          class="mx-auto mb-4 font-title text-[clamp(2rem,4vw,3rem)] leading-tight tracking-tight"
+        >
+          ¿Listo para transformar<br />tu empresa?
+        </h2>
+        <p
+          class="mx-auto mb-8 max-w-[480px] text-[1.05rem] leading-relaxed text-gray-dove"
+        >
+          Agenda una consultoría gratuita y descubre cómo nuestros servicios
+          pueden impulsar tu negocio.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <app-button
+            href="/pages/contacto/"
+            type="primary"
+            custom-class="px-7 py-3.5 text-[0.95rem] font-semibold shadow-[0_2px_8px_rgba(0,0,0,0.15)] ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-px hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)]"
+          >
+            Agendar consultoría
+            <img src="/src/assets/icons/arrow.svg" alt="" aria-hidden="true" />
+          </app-button>
+          <app-button
+            href="/pages/servicios/"
+            type="secondary"
+            custom-class="px-7 py-3.5 text-[0.95rem] font-semibold"
+          >
+            Ver servicios
+          </app-button>
+        </div>
+      </section>
+    </main>
+
+    <app-footer></app-footer>
+
+    <script src="/src/js/inicio.js" defer></script>
+  </body>
+</html>
