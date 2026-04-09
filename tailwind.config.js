@@ -1,3 +1,3 @@
 module.exports = {
-  content: ["./index.html", "./src/**/*.{js,html}"],
+  content: ["./index.html", "./pages/**/*.html", "./src/**/*.{js,html}"],
 };
