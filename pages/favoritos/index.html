@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechNova — Mis favoritos</title>
+    <link href="/src/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/css/favoritos.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="/src/main.js" type="module"></script>
+  </head>
+  <body>
+    <app-navbar active="favoritos"></app-navbar>
+
+    <main class="page-container flex flex-col gap-10 pb-25">
+      <header
+        class="animate-fade-up flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-end"
+      >
+        <div>
+          <h1
+            class="font-title text-[clamp(2.25rem,4.5vw,3.25rem)] font-normal leading-tight tracking-tight text-gray-cod"
+          >
+            Mis <em class="not-italic text-blue-royal">favoritos</em>
+          </h1>
+          <p class="mt-2 text-base text-gray-dove">
+            Tus servicios guardados para acceso rápido.
+          </p>
+        </div>
+        <div
+          id="favCounter"
+          class="inline-flex items-center gap-2 rounded-full bg-blue-royal/10 px-4 py-2 text-sm font-semibold text-blue-royal"
+        >
+          ♥ <span id="countNum">4</span> servicios guardados
+        </div>
+      </header>
+
+      <section class="flex flex-col gap-8">
+        <div
+          id="favGrid"
+          class="grid grid-cols-1 gap-5 lg:grid-cols-2"
+        >
+          <article
+            class="fav-card group relative flex flex-col overflow-hidden rounded-2xl border border-gray-cararra bg-white transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] animate-fade-up hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.04)] sm:flex-row"
+            data-id="1"
+          >
+            <div
+              class="relative flex min-h-[120px] w-full shrink-0 items-center justify-center text-5xl sm:min-h-[160px] sm:w-40"
+              style="background: linear-gradient(135deg, #ebf1ff, #d6e4ff)"
+            >
+              <span class="relative z-[1]">💻</span>
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <p
+                class="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-blue-royal"
+              >
+                Desarrollo
+              </p>
+              <h3
+                class="mb-1.5 text-[17px] font-semibold tracking-tight text-gray-cod"
+              >
+                Desarrollo Web Full Stack
+              </h3>
+              <p class="flex-1 text-sm leading-relaxed text-gray-dove">
+                Aplicaciones web modernas con React, Angular y Node.js.
+              </p>
+              <div class="mt-4 flex flex-wrap items-center gap-2">
+                <app-button
+                  href="/pages/servicios/"
+                  type="primary"
+                  custom-class="px-4 py-2 text-[0.8125rem] font-semibold"
+                >
+                  Ver detalle →
+                </app-button>
+                <button
+                  type="button"
+                  class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-red-200 bg-transparent px-3.5 py-2 text-[13px] font-semibold text-red-600 transition-colors duration-300 hover:bg-red-50"
+                  onclick="removeFav(this)"
+                >
+                  ✕ Quitar
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article
+            class="fav-card group relative flex flex-col overflow-hidden rounded-2xl border border-gray-cararra bg-white transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] animate-fade-up hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.04)] sm:flex-row"
+            data-id="2"
+          >
+            <div
+              class="relative flex min-h-[120px] w-full shrink-0 items-center justify-center text-5xl sm:min-h-[160px] sm:w-40"
+              style="background: linear-gradient(135deg, #f0fdf4, #dcfce7)"
+            >
+              <span class="relative z-[1]">🛡️</span>
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <p
+                class="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-blue-royal"
+              >
+                Seguridad
+              </p>
+              <h3
+                class="mb-1.5 text-[17px] font-semibold tracking-tight text-gray-cod"
+              >
+                Ciberseguridad Empresarial
+              </h3>
+              <p class="flex-1 text-sm leading-relaxed text-gray-dove">
+                Auditorías, monitoreo 24/7 y respuesta a incidentes.
+              </p>
+              <div class="mt-4 flex flex-wrap items-center gap-2">
+                <app-button
+                  href="/pages/servicios/"
+                  type="primary"
+                  custom-class="px-4 py-2 text-[0.8125rem] font-semibold"
+                >
+                  Ver detalle →
+                </app-button>
+                <button
+                  type="button"
+                  class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-red-200 bg-transparent px-3.5 py-2 text-[13px] font-semibold text-red-600 transition-colors duration-300 hover:bg-red-50"
+                  onclick="removeFav(this)"
+                >
+                  ✕ Quitar
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article
+            class="fav-card group relative flex flex-col overflow-hidden rounded-2xl border border-gray-cararra bg-white transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] animate-fade-up hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.04)] sm:flex-row"
+            data-id="3"
+          >
+            <div
+              class="relative flex min-h-[120px] w-full shrink-0 items-center justify-center text-5xl sm:min-h-[160px] sm:w-40"
+              style="background: linear-gradient(135deg, #fff7ed, #ffedd5)"
+            >
+              <span class="relative z-[1]">☁️</span>
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <p
+                class="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-blue-royal"
+              >
+                Cloud
+              </p>
+              <h3
+                class="mb-1.5 text-[17px] font-semibold tracking-tight text-gray-cod"
+              >
+                Soluciones en la Nube
+              </h3>
+              <p class="flex-1 text-sm leading-relaxed text-gray-dove">
+                Migración y optimización en AWS, Azure y GCP.
+              </p>
+              <div class="mt-4 flex flex-wrap items-center gap-2">
+                <app-button
+                  href="/pages/servicios/"
+                  type="primary"
+                  custom-class="px-4 py-2 text-[0.8125rem] font-semibold"
+                >
+                  Ver detalle →
+                </app-button>
+                <button
+                  type="button"
+                  class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-red-200 bg-transparent px-3.5 py-2 text-[13px] font-semibold text-red-600 transition-colors duration-300 hover:bg-red-50"
+                  onclick="removeFav(this)"
+                >
+                  ✕ Quitar
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article
+            class="fav-card group relative flex flex-col overflow-hidden rounded-2xl border border-gray-cararra bg-white transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] animate-fade-up hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.04)] sm:flex-row"
+            data-id="4"
+          >
+            <div
+              class="relative flex min-h-[120px] w-full shrink-0 items-center justify-center text-5xl sm:min-h-[160px] sm:w-40"
+              style="background: linear-gradient(135deg, #f5f3ff, #ede9fe)"
+            >
+              <span class="relative z-[1]">🤖</span>
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <p
+                class="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-blue-royal"
+              >
+                Consultoría
+              </p>
+              <h3
+                class="mb-1.5 text-[17px] font-semibold tracking-tight text-gray-cod"
+              >
+                Inteligencia Artificial
+              </h3>
+              <p class="flex-1 text-sm leading-relaxed text-gray-dove">
+                Modelos de IA y ML para automatizar procesos de negocio.
+              </p>
+              <div class="mt-4 flex flex-wrap items-center gap-2">
+                <app-button
+                  href="/pages/servicios/"
+                  type="primary"
+                  custom-class="px-4 py-2 text-[0.8125rem] font-semibold"
+                >
+                  Ver detalle →
+                </app-button>
+                <button
+                  type="button"
+                  class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-red-200 bg-transparent px-3.5 py-2 text-[13px] font-semibold text-red-600 transition-colors duration-300 hover:bg-red-50"
+                  onclick="removeFav(this)"
+                >
+                  ✕ Quitar
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div
+          id="emptyState"
+          class="hidden animate-fade-up px-6 py-20 text-center sm:px-10"
+        >
+          <div
+            class="mx-auto mb-6 flex h-[88px] w-[88px] items-center justify-center rounded-full bg-gray-pampas text-[2.5rem]"
+          >
+            ♡
+          </div>
+          <h3 class="mb-2 text-[22px] font-semibold text-gray-cod">
+            No tienes favoritos aún
+          </h3>
+          <p
+            class="mx-auto mb-7 max-w-[400px] text-[15px] text-gray-dove"
+          >
+            Explora nuestro catálogo de servicios y guarda los que más te
+            interesen para acceder a ellos rápidamente.
+          </p>
+          <app-button
+            href="/pages/servicios/"
+            type="primary"
+            custom-class="px-7 py-3.5 text-[0.9375rem] font-semibold shadow-[0_2px_8px_rgba(0,0,0,0.15)] ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-0.5 hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)]"
+          >
+            Explorar servicios
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 8h10M9 4l4 4-4 4"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </app-button>
+        </div>
+      </section>
+    </main>
+
+    <app-footer></app-footer>
+
+    <script>
+      function removeFav(btn) {
+        const card = btn.closest(".fav-card");
+        card.classList.add("removing");
+
+        setTimeout(function () {
+          card.remove();
+          updateCount();
+        }, 300);
+      }
+
+      function updateCount() {
+        const remaining = document.querySelectorAll(
+          ".fav-card:not(.removing)"
+        ).length;
+        document.getElementById("countNum").textContent = remaining;
+
+        if (remaining === 0) {
+          document.getElementById("favGrid").classList.add("hidden");
+          document.getElementById("emptyState").classList.remove("hidden");
+          document.getElementById("favCounter").classList.add("hidden");
+        }
+      }
+    </script>
+  </body>
+</html>
