@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechNova — Contacto</title>
+    <link href="/src/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/css/contacto.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="/src/main.js" type="module"></script>
+  </head>
+  <body>
+    <app-navbar active="contacto"></app-navbar>
+
+    <main class="page-container pb-25">
+      <div
+        class="animate-contact-page grid grid-cols-1 items-start gap-12 lg:grid-cols-[1fr_1.3fr] lg:gap-20"
+      >
+        <div>
+          <h1
+            class="mb-5 font-title text-[clamp(2.25rem,4vw,3rem)] font-normal leading-tight tracking-tight text-gray-cod"
+          >
+            Hablemos de tu <em class="not-italic text-blue-royal">proyecto</em>
+          </h1>
+          <p
+            class="mb-12 max-w-[400px] text-base leading-relaxed text-gray-dove"
+          >
+            Cuéntanos qué necesitas y nuestro equipo se pondrá en contacto
+            contigo en menos de 24 horas.
+          </p>
+
+          <div class="flex flex-col gap-5">
+            <div
+              class="flex items-center gap-4 rounded-[14px] border border-gray-cararra bg-white p-5 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:translate-x-1 hover:border-blue-royal"
+            >
+              <div
+                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-xl"
+                style="background: #ebf1ff"
+              >
+                📧
+              </div>
+              <div>
+                <div
+                  class="text-xs font-semibold uppercase tracking-wide text-gray-dusty"
+                >
+                  Email
+                </div>
+                <a
+                  href="mailto:info@technova.co"
+                  class="mt-0.5 block text-[15px] font-medium text-gray-cod no-underline transition-colors hover:text-blue-royal"
+                  >info@technova.co</a
+                >
+              </div>
+            </div>
+            <div
+              class="flex items-center gap-4 rounded-[14px] border border-gray-cararra bg-white p-5 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:translate-x-1 hover:border-blue-royal"
+            >
+              <div
+                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-xl"
+                style="background: #f0fdf4"
+              >
+                📞
+              </div>
+              <div>
+                <div
+                  class="text-xs font-semibold uppercase tracking-wide text-gray-dusty"
+                >
+                  Teléfono
+                </div>
+                <a
+                  href="tel:+573001234567"
+                  class="mt-0.5 block text-[15px] font-medium text-gray-cod no-underline transition-colors hover:text-blue-royal"
+                  >+57 300 123 4567</a
+                >
+              </div>
+            </div>
+            <div
+              class="flex items-center gap-4 rounded-[14px] border border-gray-cararra bg-white p-5 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:translate-x-1 hover:border-blue-royal"
+            >
+              <div
+                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-xl"
+                style="background: #fff7ed"
+              >
+                📍
+              </div>
+              <div>
+                <div
+                  class="text-xs font-semibold uppercase tracking-wide text-gray-dusty"
+                >
+                  Ubicación
+                </div>
+                <div class="mt-0.5 text-[15px] font-medium text-gray-cod">
+                  Medellín, Colombia
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex items-center gap-4 rounded-[14px] border border-gray-cararra bg-white p-5 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:translate-x-1 hover:border-blue-royal"
+            >
+              <div
+                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-xl"
+                style="background: #f5f3ff"
+              >
+                🕐
+              </div>
+              <div>
+                <div
+                  class="text-xs font-semibold uppercase tracking-wide text-gray-dusty"
+                >
+                  Horario
+                </div>
+                <div class="mt-0.5 text-[15px] font-medium text-gray-cod">
+                  Lun – Vie, 8:00 – 18:00
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="rounded-[20px] border border-gray-cararra bg-white p-7 shadow-[0_4px_20px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.04)] sm:p-10"
+        >
+          <div id="formView">
+            <h2 class="mb-2 text-xl font-semibold text-gray-cod">
+              Envíanos un mensaje
+            </h2>
+            <p class="mb-8 text-sm text-gray-dove">
+              Los campos con * son obligatorios
+            </p>
+
+            <form id="contactForm" novalidate>
+              <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+                <div class="form-group flex flex-col gap-1.5" id="grpNombre">
+                  <label
+                    class="flex items-center gap-1 text-[13px] font-semibold text-gray-cod"
+                    for="nombre"
+                    >Nombre <span class="text-red-600">*</span></label
+                  >
+                  <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    placeholder="Tu nombre"
+                    class="contact-input w-full rounded-lg border border-gray-cararra bg-[#fafaf9] px-4 py-3 text-[15px] text-gray-cod outline-none transition-all duration-300 placeholder:text-gray-dusty focus:border-blue-royal focus:bg-white focus:ring-[3px] focus:ring-blue-royal/15"
+                  />
+                  <span class="error-msg">El nombre es obligatorio</span>
+                </div>
+
+                <div class="form-group flex flex-col gap-1.5" id="grpApellido">
+                  <label
+                    class="flex items-center gap-1 text-[13px] font-semibold text-gray-cod"
+                    for="apellido"
+                    >Apellido <span class="text-red-600">*</span></label
+                  >
+                  <input
+                    type="text"
+                    id="apellido"
+                    name="apellido"
+                    placeholder="Tu apellido"
+                    class="contact-input w-full rounded-lg border border-gray-cararra bg-[#fafaf9] px-4 py-3 text-[15px] text-gray-cod outline-none transition-all duration-300 placeholder:text-gray-dusty focus:border-blue-royal focus:bg-white focus:ring-[3px] focus:ring-blue-royal/15"
+                  />
+                  <span class="error-msg">El apellido es obligatorio</span>
+                </div>
+
+                <div class="form-group flex flex-col gap-1.5" id="grpEmail">
+                  <label
+                    class="flex items-center gap-1 text-[13px] font-semibold text-gray-cod"
+                    for="email"
+                    >Correo electrónico <span class="text-red-600">*</span></label
+                  >
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="correo@ejemplo.com"
+                    class="contact-input w-full rounded-lg border border-gray-cararra bg-[#fafaf9] px-4 py-3 text-[15px] text-gray-cod outline-none transition-all duration-300 placeholder:text-gray-dusty focus:border-blue-royal focus:bg-white focus:ring-[3px] focus:ring-blue-royal/15"
+                  />
+                  <span class="error-msg">Ingresa un correo válido</span>
+                </div>
+
+                <div class="form-group flex flex-col gap-1.5" id="grpTelefono">
+                  <label
+                    class="text-[13px] font-semibold text-gray-cod"
+                    for="telefono"
+                    >Teléfono</label
+                  >
+                  <input
+                    type="tel"
+                    id="telefono"
+                    name="telefono"
+                    placeholder="+57 300 000 0000"
+                    class="contact-input w-full rounded-lg border border-gray-cararra bg-[#fafaf9] px-4 py-3 text-[15px] text-gray-cod outline-none transition-all duration-300 placeholder:text-gray-dusty focus:border-blue-royal focus:bg-white focus:ring-[3px] focus:ring-blue-royal/15"
+                  />
+                </div>
+
+                <div
+                  class="form-group col-span-full flex flex-col gap-1.5 md:col-span-2"
+                  id="grpServicio"
+                >
+                  <label
+                    class="flex items-center gap-1 text-[13px] font-semibold text-gray-cod"
+                    for="servicio"
+                    >Servicio de interés <span class="text-red-600">*</span></label
+                  >
+                  <select
+                    id="servicio"
+                    name="servicio"
+                    class="contact-input contact-select w-full rounded-lg border border-gray-cararra bg-[#fafaf9] px-4 py-3 text-[15px] text-gray-cod outline-none transition-all duration-300 focus:border-blue-royal focus:bg-white focus:ring-[3px] focus:ring-blue-royal/15"
+                  >
+                    <option value="">Selecciona un servicio</option>
+                  </select>
+                  <span class="error-msg">Selecciona un servicio</span>
+                </div>
+
+                <div
+                  class="form-group col-span-full flex flex-col gap-1.5 md:col-span-2"
+                  id="grpMensaje"
+                >
+                  <label
+                    class="flex items-center gap-1 text-[13px] font-semibold text-gray-cod"
+                    for="mensaje"
+                    >Mensaje <span class="text-red-600">*</span></label
+                  >
+                  <textarea
+                    id="mensaje"
+                    name="mensaje"
+                    rows="4"
+                    placeholder="Cuéntanos sobre tu proyecto o necesidad..."
+                    class="contact-input min-h-[120px] w-full resize-y rounded-lg border border-gray-cararra bg-[#fafaf9] px-4 py-3 text-[15px] text-gray-cod outline-none transition-all duration-300 placeholder:text-gray-dusty focus:border-blue-royal focus:bg-white focus:ring-[3px] focus:ring-blue-royal/15"
+                  ></textarea>
+                  <span class="error-msg">El mensaje es obligatorio</span>
+                </div>
+              </div>
+
+              <div
+                class="mt-7 flex flex-col items-stretch justify-between gap-3 sm:flex-row sm:items-center"
+              >
+                <span class="text-center text-xs text-gray-dusty sm:text-left"
+                  >Respondemos en menos de 24h</span
+                >
+                <button
+                  type="submit"
+                  class="inline-flex items-center justify-center gap-2 rounded-lg bg-gray-cod px-8 py-3.5 text-[15px] font-semibold text-white transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:opacity-[0.85] hover:shadow-[0_8px_24px_rgba(37,99,235,0.25)] max-lg:w-full sm:hover:-translate-y-0.5"
+                >
+                  Enviar mensaje
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h10M9 4l4 4-4 4"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div
+            id="successView"
+            class="hidden px-2 py-8 text-center sm:px-6 sm:py-12"
+          >
+            <div
+              class="mx-auto mb-6 flex h-[72px] w-[72px] items-center justify-center rounded-full bg-green-50 text-[2rem] text-green-600"
+            >
+              ✓
+            </div>
+            <h3 class="mb-2 text-[22px] font-semibold text-gray-cod">
+              ¡Mensaje enviado!
+            </h3>
+            <p class="mb-7 text-[15px] text-gray-dove">
+              Gracias por contactarnos. Nuestro equipo revisará tu mensaje y
+              te responderá pronto.
+            </p>
+            <button
+              type="button"
+              class="js-contact-reset cursor-pointer rounded-lg border border-gray-cararra bg-gray-pampas px-6 py-3 text-sm font-medium text-gray-cod transition-colors duration-300 hover:bg-gray-cararra/40"
+            >
+              Enviar otro mensaje
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <app-footer></app-footer>
+
+    <script src="/src/js/contacto.js" defer></script>
+  </body>
+</html>

@@ -41,8 +41,14 @@ import { NAV_LINKS } from "/src/data/nav-links.js";
         nav.appendChild(a);
       });
 
+      const contactEntry = NAV_LINKS.find(function (link) {
+        return link.key === "contacto";
+      });
       const navButton = document.createElement("app-button");
-      navButton.setAttribute("href", NAV_LINKS[1].href);
+      navButton.setAttribute(
+        "href",
+        contactEntry ? contactEntry.href : "/pages/contacto/"
+      );
       navButton.setAttribute("type", "primary");
       navButton.textContent = "Comenzar";
       nav.appendChild(navButton);
