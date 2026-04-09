@@ -1,3 +1,5 @@
+import { getServices } from "/src/js/utils/store.js";
+
 (function () {
   const form = document.getElementById("contactForm");
   const formView = document.getElementById("formView");
@@ -9,25 +11,13 @@
 
   const servicioSelect = document.getElementById("servicio");
   if (servicioSelect) {
-    fetch("/src/data/services.json")
-      .then(function (res) {
-        if (!res.ok) {
-          throw new Error("No se pudieron cargar los servicios");
-        }
-        return res.json();
-      })
-      .then(function (data) {
-        const services = data.services || [];
-        services.forEach(function (s) {
-          const opt = document.createElement("option");
-          opt.value = s.id;
-          opt.textContent = s.title;
-          servicioSelect.appendChild(opt);
-        });
-      })
-      .catch(function () {
-        console.error("Error al cargar los servicios");
-      });
+    const services = getServices();
+    services.forEach(function (s) {
+      const opt = document.createElement("option");
+      opt.value = s.id;
+      opt.textContent = s.title;
+      servicioSelect.appendChild(opt);
+    });
   }
 
   function clearErrors() {

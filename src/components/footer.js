@@ -1,19 +1,27 @@
 import { NAV_LINKS } from "/src/data/nav-links.js";
+import { getServices } from "/src/js/utils/store.js";
 
 (function () {
-  const SERVICE_LINKS = [
-    { label: "Desarrollo Web", href: "#" },
-    { label: "Cloud & DevOps", href: "#" },
-    { label: "Ciberseguridad", href: "#" },
-    { label: "Soporte IT", href: "#" },
-  ];
-
   const CONTACT_LINKS = [
     { label: "info@technova.co", href: "mailto:info@technova.co" },
     { label: "+57 300 123 4567", href: "tel:+573001234567" },
     { label: "Medellín, Colombia", href: "#" },
     { label: "Formulario", href: "/pages/contacto/" },
   ];
+
+  function getServiceLinks() {
+    const services = getServices();
+
+    if (!services || !services.length) {
+      return [];
+    }
+
+    // Solo se mostrarán 4 servicios aleatoriamente para no saturar el footer con la cantidad almacenada.
+    return services
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 4)
+      .map((s) => ({ label: s.title, href: "/pages/servicios/?id=" + s.id }));
+  }
 
   function createLinks(links) {
     return links.map(function (link) {
@@ -82,7 +90,7 @@ import { NAV_LINKS } from "/src/data/nav-links.js";
 
       grid.appendChild(brandDiv);
       grid.appendChild(createColumn("Plataforma", NAV_LINKS));
-      grid.appendChild(createColumn("Servicios", SERVICE_LINKS));
+      grid.appendChild(createColumn("Servicios", getServiceLinks()));
       grid.appendChild(createColumn("Contacto", CONTACT_LINKS));
 
       container.appendChild(grid);
