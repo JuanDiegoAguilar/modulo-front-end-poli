@@ -74,8 +74,7 @@
                 </app-button>
                 <button
                   type="button"
-                  class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-red-200 bg-transparent px-3.5 py-2 text-[13px] font-semibold text-red-600 transition-colors duration-300 hover:bg-red-50"
-                  onclick="removeFav(this)"
+                  class="js-fav-remove inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-red-200 bg-transparent px-3.5 py-2 text-[13px] font-semibold text-red-600 transition-colors duration-300 hover:bg-red-50"
                 >
                   ✕ Quitar
                 </button>
@@ -117,8 +116,7 @@
                 </app-button>
                 <button
                   type="button"
-                  class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-red-200 bg-transparent px-3.5 py-2 text-[13px] font-semibold text-red-600 transition-colors duration-300 hover:bg-red-50"
-                  onclick="removeFav(this)"
+                  class="js-fav-remove inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-red-200 bg-transparent px-3.5 py-2 text-[13px] font-semibold text-red-600 transition-colors duration-300 hover:bg-red-50"
                 >
                   ✕ Quitar
                 </button>
@@ -160,8 +158,7 @@
                 </app-button>
                 <button
                   type="button"
-                  class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-red-200 bg-transparent px-3.5 py-2 text-[13px] font-semibold text-red-600 transition-colors duration-300 hover:bg-red-50"
-                  onclick="removeFav(this)"
+                  class="js-fav-remove inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-red-200 bg-transparent px-3.5 py-2 text-[13px] font-semibold text-red-600 transition-colors duration-300 hover:bg-red-50"
                 >
                   ✕ Quitar
                 </button>
@@ -203,8 +200,7 @@
                 </app-button>
                 <button
                   type="button"
-                  class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-red-200 bg-transparent px-3.5 py-2 text-[13px] font-semibold text-red-600 transition-colors duration-300 hover:bg-red-50"
-                  onclick="removeFav(this)"
+                  class="js-fav-remove inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-red-200 bg-transparent px-3.5 py-2 text-[13px] font-semibold text-red-600 transition-colors duration-300 hover:bg-red-50"
                 >
                   ✕ Quitar
                 </button>
@@ -259,29 +255,6 @@
 
     <app-footer></app-footer>
 
-    <script>
-      function removeFav(btn) {
-        const card = btn.closest(".fav-card");
-        card.classList.add("removing");
-
-        setTimeout(function () {
-          card.remove();
-          updateCount();
-        }, 300);
-      }
-
-      function updateCount() {
-        const remaining = document.querySelectorAll(
-          ".fav-card:not(.removing)"
-        ).length;
-        document.getElementById("countNum").textContent = remaining;
-
-        if (remaining === 0) {
-          document.getElementById("favGrid").classList.add("hidden");
-          document.getElementById("emptyState").classList.remove("hidden");
-          document.getElementById("favCounter").classList.add("hidden");
-        }
-      }
-    </script>
+    <script src="/src/js/favoritos.js" defer></script>
   </body>
 </html>
