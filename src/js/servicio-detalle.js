@@ -91,6 +91,89 @@ function addServiceInformation(container, service) {
 
 /**
  * @param {Object} service
+ * @returns {HTMLElement}
+ */
+function createInfoGrid(service) {
+  const grid = document.createElement("div");
+  grid.className =
+    "grid grid-cols-2 gap-x-6 gap-y-4 rounded-xl bg-gray-pampas p-6 mt-4";
+
+  const items = [
+    { label: "Tiempo estimado", value: service.estimatedTime || "—" },
+    { label: "Modalidad", value: service.modality || "—" },
+    { label: "Tecnologías", value: service.technologies || "—" },
+    {
+      label: "Disponibilidad",
+      value: "Disponible",
+      valueClass: "text-[#16A34A]",
+    },
+  ];
+
+  items.forEach(({ label, value, valueClass }) => {
+    const cell = document.createElement("div");
+    cell.className = "flex flex-col gap-1";
+
+    const labelEl = document.createElement("span");
+    labelEl.className =
+      "text-xs text-[#9E9E9E] uppercase tracking-wider font-semibold";
+    labelEl.textContent = label;
+
+    const valueEl = document.createElement("span");
+    valueEl.className =
+      "text-base font-semibold " + (valueClass || "text-gray-cod");
+    valueEl.textContent = value;
+
+    cell.appendChild(labelEl);
+    cell.appendChild(valueEl);
+    grid.appendChild(cell);
+  });
+
+  return grid;
+}
+
+/**
+ * @param {Object} service
+ * @returns {HTMLElement|null}
+ */
+function createIncludesSection(service) {
+  if (!service.includes?.length) return null;
+
+  const section = document.createElement("div");
+  section.className = "flex flex-col gap-3 my-6";
+
+  const title = document.createElement("h2");
+  title.className =
+    "text-[.8rem] font-semibold text-gray-dusty uppercase tracking-wider";
+  title.textContent = "Incluye";
+  section.appendChild(title);
+
+  const list = document.createElement("ul");
+  list.className = "flex flex-col gap-2";
+
+  service.includes.forEach((item) => {
+    const row = document.createElement("li");
+    row.className = "flex items-center gap-3 h-10";
+
+    const check = document.createElement("span");
+    check.className =
+      "flex size-5.5 flex-shrink-0 items-center justify-center rounded bg-gray-pampas text-emerald-500 text-xs font-bold";
+    check.textContent = "✓";
+
+    const text = document.createElement("span");
+    text.className = "text-sm text-gray-cod";
+    text.textContent = item;
+
+    row.appendChild(check);
+    row.appendChild(text);
+    list.appendChild(row);
+  });
+
+  section.appendChild(list);
+  return section;
+}
+
+/**
+ * @param {Object} service
  * @param {boolean} isFavorite
  * @param {Function} onBack
  * @returns {HTMLElement}
@@ -100,6 +183,11 @@ function createRightColumn(service, isFavorite, onBack) {
   rightCol.className = "flex flex-1 flex-col gap-3";
 
   addServiceInformation(rightCol, service);
+
+  rightCol.appendChild(createInfoGrid(service));
+
+  const includes = createIncludesSection(service);
+  if (includes) rightCol.appendChild(includes);
 
   const actions = document.createElement("div");
   actions.className = "flex flex-wrap gap-3 mt-2";
