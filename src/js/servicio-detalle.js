@@ -105,7 +105,7 @@ function createRightColumn(service, isFavorite, onBack) {
   actions.className = "flex flex-wrap gap-3 mt-2";
 
   const contactBtn = document.createElement("app-button");
-  contactBtn.href = "/pages/contacto/";
+  contactBtn.setAttribute("href", "/pages/contacto/");
   contactBtn.innerHTML = `Contactar <img src="/src/assets/icons/arrow.svg" alt="" aria-hidden="true" />`;
   contactBtn.setAttribute("type", "basic");
   contactBtn.setAttribute(

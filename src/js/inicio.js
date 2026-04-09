@@ -23,7 +23,7 @@ import { getServices } from "/src/js/utils/store.js";
     iconWrap.textContent = service.emoji || "";
 
     var title = document.createElement("h3");
-    title.className = "mb-2 text-lg font-semibold";
+    title.className = "mb-2 text-lg font-semibold line-clamp-2";
     title.textContent = service.title || "";
 
     var desc = document.createElement("p");

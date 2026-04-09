@@ -6,6 +6,14 @@ export const CATEGORIES = [
   "Consultoría",
 ];
 
+export const CATEGORY_COLORS = {
+  Desarrollo: "bg-blue-50",
+  Seguridad: "bg-amber-50",
+  Cloud: "bg-emerald-50",
+  Soporte: "bg-emerald-50",
+  Consultoría: "bg-violet-50",
+};
+
 export const SERVICES = [
   {
     id: "desarrollo-web",
