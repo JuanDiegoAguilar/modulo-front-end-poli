@@ -8,6 +8,10 @@ import { getServices } from "/src/js/utils/store.js";
     card.setAttribute("data-service-id", service.id || "");
     card.style.cursor = "pointer";
 
+    card.addEventListener("click", function () {
+      window.location.href = "/pages/servicios/?id=" + (service.id || "");
+    });
+
     var arrow = document.createElement("div");
     arrow.className =
       "absolute right-7 top-7 flex h-8 w-8 items-center justify-center rounded-lg border border-gray-cararra text-[0.85rem] text-gray-dusty transition-all duration-300 ease group-hover:border-gray-cod group-hover:bg-gray-cod group-hover:text-white";

@@ -5,6 +5,7 @@ import {
   toggleFavorite,
   addService,
 } from "/src/js/utils/store.js";
+import { showServiceDetail } from "/src/js/servicio-detalle.js";
 
 (function () {
   let activeCategory = "all";
@@ -15,8 +16,25 @@ import {
     // TODO: añadir lógica para agregar servicio
   }
 
+  function showGrid() {
+    const url = new URL(window.location);
+    url.searchParams.delete("id");
+    window.history.pushState({}, "", url);
+
+    const gridView = document.getElementById("grid-view");
+    const detailView = document.getElementById("detail-view");
+
+    if (detailView) {
+      detailView.className = "hidden";
+      detailView.replaceChildren();
+    }
+    if (gridView) gridView.classList.remove("hidden");
+
+    renderGrid();
+  }
+
   function openDetailView(serviceId) {
-    // TODO: añadir lógica para detalle
+    showServiceDetail(serviceId, showGrid);
   }
 
   function createAddCard() {
@@ -78,12 +96,14 @@ import {
     favoriteBtn.setAttribute("data-favorite", isFavorite ? "true" : "false");
 
     favoriteBtn.addEventListener("click", function () {
-      const favoriteServices = toggleFavorite(service.id);
-      const nowFavorite = favoriteServices.includes(service.id);
+      const isNowFavorite = toggleFavorite(service.id).includes(service.id);
 
-      favoriteBtn.setAttribute("data-favorite", nowFavorite ? "true" : "false");
-      favoriteBtn.className = getFavoriteBtnClass(nowFavorite);
-      favoriteBtn.querySelector("span").textContent = nowFavorite ? "♥" : "♡";
+      favoriteBtn.setAttribute(
+        "data-favorite",
+        isNowFavorite ? "true" : "false",
+      );
+      favoriteBtn.className = getFavoriteBtnClass(isNowFavorite);
+      favoriteBtn.querySelector("span").textContent = isNowFavorite ? "♥" : "♡";
     });
 
     actions.appendChild(viewMore);

@@ -20,7 +20,7 @@ import { getServices } from "/src/js/utils/store.js";
     return services
       .sort(() => Math.random() - 0.5)
       .slice(0, 4)
-      .map((s) => ({ label: s.title, href: "#" + s.id }));
+      .map((s) => ({ label: s.title, href: "/pages/servicios/?id=" + s.id }));
   }
 
   function createLinks(links) {
