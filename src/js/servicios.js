@@ -3,18 +3,14 @@ import {
   getServices,
   getFavorites,
   toggleFavorite,
-  addService,
 } from "/src/js/utils/store.js";
 import { showServiceDetail } from "/src/js/servicio-detalle.js";
+import { openAddServiceModal } from "/src/js/servicio-creacion.js";
 
 (function () {
   let activeCategory = "all";
   let searchQuery = "";
   let searchTimeoutId = null;
-
-  function openAddServiceModal() {
-    // TODO: añadir lógica para agregar servicio
-  }
 
   function showGrid() {
     const url = new URL(window.location);
@@ -56,7 +52,7 @@ import { showServiceDetail } from "/src/js/servicio-detalle.js";
     card.appendChild(circle);
     card.appendChild(label);
 
-    card.addEventListener("click", openAddServiceModal);
+    card.addEventListener("click", () => openAddServiceModal(renderGrid));
 
     return card;
   }
@@ -197,7 +193,9 @@ import { showServiceDetail } from "/src/js/servicio-detalle.js";
       btnAddService.textContent = "Agregar nuevo servicio";
       btnAddService.setAttribute("custom-class", "mt-3 cursor-pointer");
 
-      btnAddService.addEventListener("click", openAddServiceModal);
+      btnAddService.addEventListener("click", () =>
+        openAddServiceModal(renderGrid),
+      );
       emptyText.appendChild(btnAddService);
 
       container.appendChild(emptyText);

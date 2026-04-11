@@ -31,3 +31,4 @@ document.head.prepend(tailwindCustomStyle);
 import "./components/button.js";
 import "./components/navbar.js";
 import "./components/footer.js";
+import "./components/modal.js";
