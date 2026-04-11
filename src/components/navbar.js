@@ -2,7 +2,7 @@ import { NAV_LINKS } from "/src/data/nav-links.js";
 
 (function () {
   const BASE_LINK_CLASS =
-    "rounded-lg px-4 py-2 text-sm font-medium no-underline transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:bg-gray-pampas hover:text-gray-cod";
+    "rounded-lg px-4 py-2 text-sm font-medium no-underline transition-all duration-300 ease hover:bg-gray-pampas hover:text-gray-cod";
 
   const ACTIVE_LINK_CLASS = "bg-gray-pampas text-gray-cod";
   const INACTIVE_LINK_CLASS = "text-gray-dove";
@@ -41,8 +41,14 @@ import { NAV_LINKS } from "/src/data/nav-links.js";
         nav.appendChild(a);
       });
 
+      const contactEntry = NAV_LINKS.find(function (link) {
+        return link.key === "contacto";
+      });
       const navButton = document.createElement("app-button");
-      navButton.setAttribute("href", NAV_LINKS[1].href);
+      navButton.setAttribute(
+        "href",
+        contactEntry ? contactEntry.href : "/pages/contacto/"
+      );
       navButton.setAttribute("type", "primary");
       navButton.textContent = "Comenzar";
       nav.appendChild(navButton);
