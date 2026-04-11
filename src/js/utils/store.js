@@ -93,6 +93,19 @@ export function getFavorites() {
 }
 
 /**
+ * Guarda la lista completa de favoritos en localStorage.
+ * @param {string[]} favorites
+ * @returns {string[]}
+ */
+export function setFavorites(favorites) {
+  try {
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+  } catch {}
+
+  return favorites;
+}
+
+/**
  * Agrega o quita un servicio de favoritos según su estado actual.
  * @param {string} id
  * @returns {Array} Lista actualizada de servicios favoritos.
