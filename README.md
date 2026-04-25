@@ -81,6 +81,48 @@ modulo-front-end-poli/
 └── legacy/                            # Versión anterior (HTML + JS + Web Components) como referencia
 ```
 
+## Despliegue en GitHub Pages
+
+El proyecto incluye un workflow de **GitHub Actions** ([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)) que hace build y deploy automáticamente en cada push a `main`.
+
+### Pasos para activarlo
+
+1. **Habilita Pages en el repositorio**
+   - Entra a `Settings` → `Pages`.
+   - En _Build and deployment_ → _Source_, selecciona **GitHub Actions** (no "Deploy from a branch").
+
+2. **Mergea la rama de Angular a `main`**
+   ```bash
+   git checkout main
+   git merge feat/tranformarAngular
+   git push origin main
+   ```
+   El push dispara el workflow.
+
+3. **Verifica el deploy**
+   - En la pestaña `Actions` verás el job `Deploy to GitHub Pages` corriendo (~1-2 min).
+   - Cuando termine, el sitio queda disponible en:
+     ```
+     https://<tu-usuario>.github.io/<nombre-del-repo>/
+     ```
+     Para este proyecto: `https://juandiegoaguilar.github.io/modulo-front-end-poli/`
+
+### Probar el build de Pages localmente (opcional)
+
+```bash
+npm run build -- --base-href "/modulo-front-end-poli/"
+npx http-server dist/technova/browser -p 8080
+# Abre http://localhost:8080/modulo-front-end-poli/
+```
+
+> ⚠️ En **Git Bash sobre Windows**, el argumento `/modulo-front-end-poli/` se convierte automáticamente a una ruta absoluta de Windows. Para evitarlo, usa **PowerShell** o **cmd** en lugar de Git Bash, o antepón `MSYS_NO_PATHCONV=1`. En CI (Ubuntu) no pasa.
+
+### Cómo funciona el workflow
+
+- Hace `npm ci` y `npm run build -- --base-href "/<nombre-del-repo>/"` (el `base-href` es necesario porque Pages sirve desde una subruta).
+- Copia `index.html` como `404.html` para que el routing de Angular siga funcionando si el usuario refresca en `/servicios`, `/contacto`, etc. (GitHub Pages sirve `404.html` cuando una ruta no existe como archivo, y Angular toma el control desde ahí).
+- Sube los archivos de `dist/technova/browser/` y los publica con `actions/deploy-pages@v4`.
+
 ## Notas técnicas
 
 - **Persistencia**: el `ServicesStore` lee `technova_services` y `technova_favorites` de `localStorage` al inicializar. Los datos se mantienen entre sesiones.
