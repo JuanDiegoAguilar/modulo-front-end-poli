@@ -1,0 +1,91 @@
+<main class="page-container">
+  @if (showingDetail()) {
+    <router-outlet />
+  } @else {
+    <div class="flex flex-col gap-12 lg:gap-15">
+      <section>
+        <h1
+          class="mb-4 font-title text-4xl leading-[1.1] tracking-tight text-gray-cod sm:text-5xl md:text-6xl"
+        >
+          Nuestros <span class="italic text-blue-royal">servicios</span>
+        </h1>
+        <p class="max-w-[580px] text-base leading-relaxed text-gray-dove sm:text-[1.1rem]">
+          Explora todas las soluciones tecnológicas que tenemos disponibles para tu
+          empresa.
+        </p>
+      </section>
+
+      <section>
+        <div class="mb-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+          <div class="flex flex-wrap items-center gap-2">
+            @for (cat of allCategories; track cat) {
+              <button
+                type="button"
+                [class]="filterClasses(cat)"
+                (click)="setCategory(cat)"
+              >
+                {{ cat === 'all' ? 'Todos' : cat }}
+              </button>
+            }
+          </div>
+
+          <div class="relative w-full sm:ml-auto sm:w-[250px]">
+            <span
+              class="pointer-events-none absolute inset-y-0 left-3 flex items-center text-[.7rem]"
+              aria-hidden="true"
+            >
+              🔍
+            </span>
+            <input
+              type="search"
+              placeholder="Buscar servicios…"
+              [value]="searchInput()"
+              (input)="onSearchInput($event)"
+              class="w-full rounded-xl border border-gray-cararra bg-white py-2 pl-8 pr-5 text-[.9rem] text-gray-cod outline-none transition-colors placeholder:text-[#9E9E9E] focus:border-gray-cod"
+            />
+          </div>
+        </div>
+
+        @if (filteredServices().length === 0) {
+          <div class="py-16 text-center">
+            <p class="mb-4 text-lg italic text-gray-dusty">
+              No se encontraron servicios.
+            </p>
+            <app-button (clicked)="openAddModal()">Agregar nuevo servicio</app-button>
+          </div>
+        } @else {
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            @for (svc of filteredServices(); track svc.id) {
+              <app-service-card
+                [service]="svc"
+                [isFavorite]="store.isFavorite(svc.id)"
+                (viewDetail)="goToService($event)"
+                (toggleFavorite)="store.toggleFavorite($event)"
+              />
+            }
+            <button
+              type="button"
+              class="flex min-h-[350px] cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-gray-cararra bg-transparent text-gray-dusty transition-all duration-300 hover:border-gray-cod hover:text-gray-cod"
+              (click)="openAddModal()"
+            >
+              <div
+                class="flex size-14 items-center justify-center rounded-full border-2 border-dashed border-inherit text-2xl leading-none"
+                aria-hidden="true"
+              >
+                +
+              </div>
+              <span class="text-sm font-medium">Agregar nuevo servicio</span>
+            </button>
+          </div>
+        }
+      </section>
+    </div>
+  }
+</main>
+
+@if (modalOpen()) {
+  <app-add-service-modal
+    (closed)="modalOpen.set(false)"
+    (created)="modalOpen.set(false)"
+  />
+}

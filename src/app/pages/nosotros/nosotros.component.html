@@ -1,0 +1,165 @@
+<main class="page-container flex flex-col gap-24 sm:gap-32 lg:gap-48">
+  <!-- Hero -->
+  <section class="flex flex-col items-center text-center">
+    <h1
+      class="mb-6 max-w-[18ch] font-title text-4xl leading-[1.1] tracking-tight text-gray-cod sm:text-5xl md:text-6xl lg:text-7xl"
+    >
+      Tecnología con
+      <span class="italic text-blue-royal">propósito</span>
+    </h1>
+    <p class="mb-10 max-w-[560px] text-base leading-relaxed text-gray-dove sm:text-lg">
+      Construimos soluciones digitales que transforman empresas. Somos un equipo de
+      ingenieros, diseñadores y estrategas apasionados por resolver problemas reales
+      con tecnología de vanguardia.
+    </p>
+    <div class="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+      <app-button
+        type="primary"
+        routerLink="/servicios"
+        customClass="px-7 py-3.5 text-[0.95rem] font-semibold justify-center"
+      >
+        Ver servicios <span aria-hidden="true">→</span>
+      </app-button>
+      <app-button
+        type="secondary"
+        routerLink="/contacto"
+        customClass="px-7 py-3.5 text-[0.95rem] font-semibold justify-center"
+      >
+        Contactar equipo
+      </app-button>
+    </div>
+
+    <div class="mt-12 flex flex-wrap justify-center gap-8 md:gap-16">
+      @for (s of stats; track s.label) {
+        <app-stat [value]="s.value" [label]="s.label" />
+      }
+    </div>
+  </section>
+
+  <!-- Misión y visión -->
+  <section>
+    <div class="mb-12">
+      <span
+        class="mb-4 inline-flex items-center gap-2 text-[0.8rem] font-semibold uppercase tracking-wider text-gray-dusty"
+      >
+        <span class="h-0.5 w-5 rounded-sm bg-blue-royal" aria-hidden="true"></span>
+        Quiénes somos
+      </span>
+      <h2
+        class="mb-3 font-title text-[clamp(1.75rem,4vw,2.8rem)] leading-tight tracking-tight"
+      >
+        Misión y visión
+      </h2>
+    </div>
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+      @for (mv of missionVision; track mv.title) {
+        <article class="rounded-[20px] border border-gray-cararra bg-white p-8">
+          <div
+            class="mb-5 flex size-12 items-center justify-center rounded-xl text-2xl"
+            [class]="mv.bgClass"
+            aria-hidden="true"
+          >
+            {{ mv.emoji }}
+          </div>
+          <h3 class="mb-3 text-xl font-semibold text-gray-cod">{{ mv.title }}</h3>
+          <p class="text-[1rem] leading-relaxed text-gray-dove">
+            {{ mv.description }}
+          </p>
+        </article>
+      }
+    </div>
+  </section>
+
+  <!-- Valores -->
+  <section>
+    <div class="mb-12">
+      <span
+        class="mb-4 inline-flex items-center gap-2 text-[0.8rem] font-semibold uppercase tracking-wider text-gray-dusty"
+      >
+        <span class="h-0.5 w-5 rounded-sm bg-blue-royal" aria-hidden="true"></span>
+        Lo que nos define
+      </span>
+      <h2
+        class="mb-3 font-title text-[clamp(1.75rem,4vw,2.8rem)] leading-tight tracking-tight"
+      >
+        Nuestros valores
+      </h2>
+      <p class="max-w-[520px] text-[1rem] leading-relaxed text-gray-dove sm:text-[1.05rem]">
+        Los principios que orientan cómo trabajamos, nos relacionamos y entregamos
+        resultados.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      @for (v of values; track v.title) {
+        <article class="rounded-[20px] border border-gray-cararra bg-white p-7">
+          <div class="mb-4 text-3xl" aria-hidden="true">{{ v.emoji }}</div>
+          <h3 class="mb-2 text-[1rem] font-semibold text-gray-cod">{{ v.title }}</h3>
+          <p class="text-[0.9rem] leading-relaxed text-gray-dove">
+            {{ v.description }}
+          </p>
+        </article>
+      }
+    </div>
+  </section>
+
+  <!-- Banner confianza -->
+  <section
+    class="features-banner flex flex-col items-start gap-10 rounded-[20px] bg-gray-cod p-6 text-white sm:p-10 md:flex-row md:items-center md:gap-12 md:p-16"
+  >
+    <div class="flex-1">
+      <h2 class="mb-4 font-title text-3xl leading-tight tracking-tight sm:text-4xl">
+        Más de 10 años construyendo confianza
+      </h2>
+      <p class="mb-7 text-base leading-relaxed text-white/65">
+        No somos solo proveedores — somos el equipo técnico extendido de nuestros
+        clientes. Cada proyecto es una alianza a largo plazo.
+      </p>
+      <app-button
+        type="secondary"
+        routerLink="/contacto"
+        customClass="px-7 py-3.5 text-[0.95rem] font-semibold"
+      >
+        Hablar con el equipo <span aria-hidden="true">→</span>
+      </app-button>
+    </div>
+    <div class="grid w-full flex-1 gap-4">
+      @for (f of trustFeatures; track f.title) {
+        <app-feature-card
+          theme="dark"
+          [emoji]="f.emoji"
+          [title]="f.title"
+          [description]="f.description"
+        />
+      }
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="px-4 py-8 text-center sm:px-8">
+    <h2
+      class="mx-auto mb-4 font-title text-[clamp(1.75rem,4vw,3rem)] leading-tight tracking-tight"
+    >
+      ¿Listo para trabajar<br />juntos?
+    </h2>
+    <p class="mx-auto mb-8 max-w-[480px] text-[1rem] leading-relaxed text-gray-dove sm:text-[1.05rem]">
+      Agenda una consultoría gratuita y cuéntanos tu reto. Nuestro equipo te
+      responde en menos de 24 horas.
+    </p>
+    <div class="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+      <app-button
+        type="primary"
+        routerLink="/contacto"
+        customClass="px-7 py-3.5 text-[0.95rem] font-semibold justify-center"
+      >
+        Agendar consultoría <span aria-hidden="true">→</span>
+      </app-button>
+      <app-button
+        type="secondary"
+        routerLink="/servicios"
+        customClass="px-7 py-3.5 text-[0.95rem] font-semibold justify-center"
+      >
+        Ver servicios
+      </app-button>
+    </div>
+  </section>
+</main>

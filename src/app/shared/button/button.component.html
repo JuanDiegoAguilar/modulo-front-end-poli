@@ -1,0 +1,15 @@
+<ng-template #content><ng-content /></ng-template>
+
+@if (routerLink()) {
+  <a [routerLink]="routerLink()" [class]="classes()">
+    <ng-container *ngTemplateOutlet="content" />
+  </a>
+} @else if (href()) {
+  <a [href]="href()" [class]="classes()">
+    <ng-container *ngTemplateOutlet="content" />
+  </a>
+} @else {
+  <button [type]="buttonType()" [class]="classes()" (click)="clicked.emit($event)">
+    <ng-container *ngTemplateOutlet="content" />
+  </button>
+}

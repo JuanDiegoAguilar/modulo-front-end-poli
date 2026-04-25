@@ -1,0 +1,176 @@
+<app-modal
+  [open]="true"
+  title="Nuevo servicio"
+  submitText="Guardar"
+  (closed)="closed.emit()"
+  (submitted)="submitForm()"
+>
+  <form [formGroup]="form" (ngSubmit)="submitForm()" class="flex flex-col gap-4">
+    <div class="flex flex-col gap-2 sm:flex-row sm:gap-3">
+      <div class="flex flex-col gap-1 sm:w-20">
+        <label for="emoji" class="text-sm font-medium text-gray-cod">
+          Icono <span class="text-red-500">*</span>
+        </label>
+        <input
+          id="emoji"
+          type="text"
+          formControlName="emoji"
+          maxlength="2"
+          placeholder="⚙️"
+          class="w-full rounded-md border border-gray-cararra bg-white px-3 py-2 text-center text-sm text-gray-cod outline-none transition-colors focus:border-gray-cod"
+          [class.border-red-500]="hasError('emoji')"
+        />
+      </div>
+      <div class="flex flex-1 flex-col gap-1">
+        <label for="name" class="text-sm font-medium text-gray-cod">
+          Nombre <span class="text-red-500">*</span>
+        </label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          maxlength="100"
+          class="w-full rounded-md border border-gray-cararra bg-white px-4 py-2 text-sm text-gray-cod outline-none transition-colors focus:border-gray-cod"
+          [class.border-red-500]="hasError('name')"
+        />
+        @if (hasError('name')) {
+          <span class="text-xs text-red-500">El nombre es obligatorio.</span>
+        }
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <label for="description" class="text-sm font-medium text-gray-cod">
+        Descripción <span class="text-red-500">*</span>
+      </label>
+      <textarea
+        id="description"
+        formControlName="description"
+        maxlength="500"
+        rows="3"
+        placeholder="Describe el servicio..."
+        class="resize-none rounded-md border border-gray-cararra bg-white px-4 py-2 text-sm text-gray-cod outline-none transition-colors focus:border-gray-cod"
+        [class.border-red-500]="hasError('description')"
+      ></textarea>
+      @if (hasError('description')) {
+        <span class="text-xs text-red-500">La descripción es obligatoria.</span>
+      }
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div class="flex flex-col gap-1">
+        <label for="estimatedTime" class="text-sm font-medium text-gray-cod">
+          Tiempo estimado <span class="text-red-500">*</span>
+        </label>
+        <input
+          id="estimatedTime"
+          type="text"
+          formControlName="estimatedTime"
+          maxlength="50"
+          placeholder="Ej: 2 semanas"
+          class="rounded-md border border-gray-cararra bg-white px-4 py-2 text-sm text-gray-cod outline-none transition-colors focus:border-gray-cod"
+          [class.border-red-500]="hasError('estimatedTime')"
+        />
+        @if (hasError('estimatedTime')) {
+          <span class="text-xs text-red-500">Ingresa el tiempo estimado.</span>
+        }
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="category" class="text-sm font-medium text-gray-cod">
+          Categoría <span class="text-red-500">*</span>
+        </label>
+        <select
+          id="category"
+          formControlName="category"
+          class="cursor-pointer rounded-md border border-gray-cararra bg-white px-4 py-2 text-sm text-gray-cod outline-none transition-colors focus:border-gray-cod"
+          [class.border-red-500]="hasError('category')"
+        >
+          <option value="">Selecciona…</option>
+          @for (cat of categories; track cat) {
+            <option [value]="cat">{{ cat }}</option>
+          }
+        </select>
+        @if (hasError('category')) {
+          <span class="text-xs text-red-500">Selecciona una categoría.</span>
+        }
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <span class="text-sm font-medium text-gray-cod">
+        Modalidad <span class="text-red-500">*</span>
+      </span>
+      <div class="flex flex-wrap gap-5">
+        <label class="flex cursor-pointer items-center gap-2 text-sm text-gray-cod">
+          <input
+            type="checkbox"
+            formControlName="remote"
+            class="cursor-pointer accent-gray-cod"
+          />
+          Remoto
+        </label>
+        <label class="flex cursor-pointer items-center gap-2 text-sm text-gray-cod">
+          <input
+            type="checkbox"
+            formControlName="hybrid"
+            class="cursor-pointer accent-gray-cod"
+          />
+          Híbrido
+        </label>
+      </div>
+      @if (modalityError()) {
+        <p class="text-xs text-red-500">Selecciona al menos una modalidad.</p>
+      }
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <label for="technologies" class="text-sm font-medium text-gray-cod">
+        Tecnologías usadas
+      </label>
+      <input
+        id="technologies"
+        type="text"
+        formControlName="technologies"
+        maxlength="100"
+        class="rounded-md border border-gray-cararra bg-white px-4 py-2 text-sm text-gray-cod outline-none transition-colors focus:border-gray-cod"
+      />
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <span class="text-sm font-medium text-gray-cod">Servicios que incluye</span>
+      <div formArrayName="includes" class="flex flex-col gap-2">
+        @for (control of includesArray.controls; track $index; let i = $index) {
+          <div class="flex items-center gap-2">
+            <input
+              type="text"
+              [formControlName]="i"
+              maxlength="100"
+              placeholder="Describe el servicio incluido…"
+              class="flex-1 rounded-md border border-gray-cararra bg-white px-4 py-2 text-sm text-gray-cod outline-none transition-colors focus:border-gray-cod"
+            />
+            <button
+              type="button"
+              class="flex size-9 cursor-pointer items-center justify-center rounded-md text-gray-dusty hover:bg-gray-pampas hover:text-gray-cod"
+              aria-label="Eliminar ítem"
+              (click)="removeInclude(i)"
+            >
+              ✕
+            </button>
+          </div>
+        }
+      </div>
+      @if (includesArray.length < maxIncludes) {
+        <button
+          type="button"
+          class="mt-1 inline-flex w-max cursor-pointer items-center gap-1 text-sm text-blue-royal transition-opacity hover:opacity-70"
+          (click)="addInclude()"
+        >
+          + Agregar ítem
+        </button>
+      }
+    </div>
+
+    <button type="submit" class="hidden" aria-hidden="true">submit</button>
+  </form>
+</app-modal>

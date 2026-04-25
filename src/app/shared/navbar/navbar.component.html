@@ -1,0 +1,66 @@
+<header
+  class="sticky inset-x-0 top-0 z-20 border-b border-gray-cararra bg-[#FAFAF9D9]/85 backdrop-blur-xl"
+>
+  <div class="mx-auto flex h-18 max-w-[1200px] items-center justify-between px-4 sm:px-6 lg:px-8">
+    <a
+      routerLink="/"
+      class="font-title text-[1.6rem] tracking-tight text-gray-cod no-underline"
+      (click)="closeMenu()"
+    >
+      Tech<span class="text-blue-royal">Nova</span>
+    </a>
+
+    <nav class="hidden items-center gap-2 md:flex">
+      @for (link of links; track link.key) {
+        <a
+          [routerLink]="link.path"
+          [routerLinkActive]="'bg-gray-pampas text-gray-cod'"
+          [routerLinkActiveOptions]="{ exact: link.exact }"
+          class="rounded-lg px-4 py-2 text-sm font-medium text-gray-dove no-underline transition-all duration-300 hover:bg-gray-pampas hover:text-gray-cod"
+        >
+          {{ link.label }}
+        </a>
+      }
+      <app-button type="primary" routerLink="/contacto">Comenzar</app-button>
+    </nav>
+
+    <button
+      type="button"
+      class="flex size-10 items-center justify-center rounded-lg border border-gray-cararra text-gray-cod transition-colors hover:bg-gray-pampas md:hidden cursor-pointer"
+      [attr.aria-expanded]="menuOpen()"
+      aria-label="Abrir menú"
+      (click)="toggleMenu()"
+    >
+      @if (menuOpen()) {
+        <span aria-hidden="true" class="text-xl leading-none">✕</span>
+      } @else {
+        <span aria-hidden="true" class="text-xl leading-none">☰</span>
+      }
+    </button>
+  </div>
+
+  @if (menuOpen()) {
+    <nav
+      class="border-t border-gray-cararra bg-white px-4 pb-4 pt-2 md:hidden animate-fade-down"
+    >
+      @for (link of links; track link.key) {
+        <a
+          [routerLink]="link.path"
+          [routerLinkActive]="'bg-gray-pampas text-gray-cod'"
+          [routerLinkActiveOptions]="{ exact: link.exact }"
+          class="block rounded-lg px-4 py-3 text-base font-medium text-gray-dove no-underline transition-colors hover:bg-gray-pampas hover:text-gray-cod"
+          (click)="closeMenu()"
+        >
+          {{ link.label }}
+        </a>
+      }
+      <a
+        routerLink="/contacto"
+        class="mt-2 block rounded-lg bg-gray-cod px-4 py-3 text-center text-base font-semibold text-white no-underline"
+        (click)="closeMenu()"
+      >
+        Comenzar
+      </a>
+    </nav>
+  }
+</header>

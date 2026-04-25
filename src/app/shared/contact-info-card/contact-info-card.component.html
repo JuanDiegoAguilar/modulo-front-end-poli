@@ -1,0 +1,16 @@
+<div class="flex items-start gap-4 rounded-2xl border border-gray-cararra bg-white p-5">
+  <div
+    class="flex size-12 flex-shrink-0 items-center justify-center rounded-xl text-xl"
+    [style.background]="bgColor()"
+  >
+    <span aria-hidden="true">{{ emoji() }}</span>
+  </div>
+  <div class="min-w-0">
+    <div class="text-[0.78rem] font-semibold uppercase tracking-wider text-gray-dusty">
+      {{ label() }}
+    </div>
+    <div class="mt-1 break-words text-[0.95rem] font-medium text-gray-cod">
+      {{ value() }}
+    </div>
+  </div>
+</div>

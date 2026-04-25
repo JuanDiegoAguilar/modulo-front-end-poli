@@ -1,0 +1,142 @@
+@if (service(); as s) {
+  <section class="flex flex-col gap-10">
+    <nav class="flex items-center gap-2 text-sm text-gray-dove">
+      <a
+        routerLink="/servicios"
+        class="cursor-pointer transition-colors hover:text-gray-cod"
+      >
+        Servicios
+      </a>
+      <span aria-hidden="true">/</span>
+      <span class="truncate">{{ s.title }}</span>
+    </nav>
+
+    <div class="flex flex-col items-start gap-10 md:flex-row md:gap-12 lg:gap-16">
+      <div
+        class="flex w-full flex-1 flex-col gap-4 rounded-2xl bg-[#FFEDD5] p-5 text-center md:min-h-[400px]"
+      >
+        <span
+          class="w-max rounded-lg bg-white px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-blue-royal"
+        >
+          {{ s.category }}
+        </span>
+        <div class="flex flex-1 items-center justify-center py-12 md:py-0">
+          <span class="select-none text-7xl leading-none sm:text-8xl">
+            {{ s.emoji }}
+          </span>
+        </div>
+      </div>
+
+      <div class="flex flex-1 flex-col gap-3">
+        <span class="text-xs font-semibold uppercase tracking-wider text-blue-royal">
+          {{ s.category }}
+        </span>
+        <h1
+          class="font-title text-3xl leading-tight text-gray-cod sm:text-4xl md:text-[2.6rem]"
+        >
+          {{ s.title }}
+        </h1>
+        <p class="text-base leading-relaxed text-gray-dove">{{ s.description }}</p>
+
+        <div class="mt-4 grid grid-cols-1 gap-x-6 gap-y-4 rounded-xl bg-gray-pampas p-6 sm:grid-cols-2">
+          @for (cell of infoCells(); track cell.label) {
+            <div class="flex flex-col gap-1">
+              <span
+                class="text-xs font-semibold uppercase tracking-wider text-[#9E9E9E]"
+              >
+                {{ cell.label }}
+              </span>
+              <span
+                class="text-base font-semibold"
+                [class.text-gray-cod]="!cell.highlight"
+                [class.text-emerald-600]="cell.highlight"
+              >
+                {{ cell.value }}
+              </span>
+            </div>
+          }
+        </div>
+
+        @if (s.includes.length) {
+          <div class="my-6 flex flex-col gap-3">
+            <h2
+              class="text-[.8rem] font-semibold uppercase tracking-wider text-gray-dusty"
+            >
+              Incluye
+            </h2>
+            <ul class="flex flex-col gap-2">
+              @for (item of s.includes; track $index) {
+                <li class="flex items-center gap-3">
+                  <span
+                    class="flex size-5 flex-shrink-0 items-center justify-center rounded bg-gray-pampas text-xs font-bold text-emerald-500"
+                  >
+                    ✓
+                  </span>
+                  <span class="text-sm text-gray-cod">{{ item }}</span>
+                </li>
+              }
+            </ul>
+          </div>
+        }
+
+        <div class="mt-2 flex flex-wrap gap-3">
+          <a
+            routerLink="/contacto"
+            class="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-blue-royal px-6 py-3 text-sm font-medium text-white no-underline transition-all duration-300 hover:bg-blue-royal/90"
+          >
+            Contactar <span aria-hidden="true">→</span>
+          </a>
+          <button
+            type="button"
+            [class]="favoriteBtnClasses()"
+            (click)="store.toggleFavorite(s.id)"
+          >
+            {{ store.isFavorite(s.id) ? '♥ En favoritos' : '♡ Agregar a favoritos' }}
+          </button>
+          <button
+            type="button"
+            class="cursor-pointer rounded-lg border border-[#FECACA] px-6 py-3 text-sm text-red-500 transition-colors hover:border-red-300 hover:bg-red-50"
+            (click)="onDelete(s.id)"
+          >
+            🗑 Eliminar servicio
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <section class="mt-10 flex flex-col gap-8">
+      <h2 class="font-title text-2xl tracking-tight text-gray-cod sm:text-3xl">
+        Servicios relacionados
+      </h2>
+      @if (relatedServices().length === 0) {
+        <p class="italic text-gray-dove">
+          No hay servicios relacionados disponibles.
+        </p>
+      } @else {
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          @for (rel of relatedServices(); track rel.id) {
+            <button
+              type="button"
+              class="flex w-full cursor-pointer items-center gap-4 rounded-lg border border-gray-cararra bg-white p-6 text-left transition-colors hover:bg-gray-pampas"
+              (click)="goTo(rel.id)"
+            >
+              <div
+                class="flex size-12 items-center justify-center rounded-xl text-2xl"
+                [class]="rel.color"
+                aria-hidden="true"
+              >
+                {{ rel.emoji }}
+              </div>
+              <div class="flex flex-col">
+                <h3 class="font-semibold text-gray-cod">{{ rel.title }}</h3>
+                <span class="text-xs tracking-wider text-gray-dusty">
+                  {{ rel.category }}
+                </span>
+              </div>
+            </button>
+          }
+        </div>
+      }
+    </section>
+  </section>
+}

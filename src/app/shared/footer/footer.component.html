@@ -1,0 +1,72 @@
+<footer class="border-t border-gray-cararra bg-white">
+  <div class="mx-auto max-w-[1200px] px-4 pb-8 pt-12 sm:px-6 lg:px-8 lg:pt-16">
+    <div
+      class="mb-12 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] lg:gap-12"
+    >
+      <div>
+        <a
+          routerLink="/"
+          class="mb-3 block font-title text-[1.4rem] tracking-tight text-gray-cod no-underline"
+        >
+          Tech<span class="text-blue-royal">Nova</span>
+        </a>
+        <p class="max-w-[280px] text-[0.88rem] leading-relaxed text-gray-dove">
+          Plataforma integral de servicios tecnológicos para empresas que buscan
+          innovar y crecer.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="mb-4 text-[0.8rem] font-semibold uppercase tracking-wider text-gray-dove">
+          Plataforma
+        </h4>
+        @for (link of navLinks; track link.label) {
+          <a
+            [routerLink]="link.path"
+            class="block py-1 text-sm text-gray-dove no-underline transition-colors duration-300 hover:text-gray-cod"
+          >
+            {{ link.label }}
+          </a>
+        }
+      </div>
+
+      <div>
+        <h4 class="mb-4 text-[0.8rem] font-semibold uppercase tracking-wider text-gray-dove">
+          Servicios
+        </h4>
+        @for (link of serviceLinks; track link.label) {
+          <a
+            [href]="link.href"
+            class="pointer-events-none block py-1 text-sm text-gray-dove no-underline transition-colors duration-300 hover:text-gray-cod"
+          >
+            {{ link.label }}
+          </a>
+        }
+      </div>
+
+      <div>
+        <h4 class="mb-4 text-[0.8rem] font-semibold uppercase tracking-wider text-gray-dove">
+          Contacto
+        </h4>
+        @for (link of contactLinks; track link.label) {
+          @if (link.path) {
+            <a
+              [routerLink]="link.path"
+              class="block py-1 text-sm text-gray-dove no-underline transition-colors duration-300 hover:text-gray-cod"
+            >
+              {{ link.label }}
+            </a>
+          } @else {
+            <a
+              [href]="link.href"
+              class="block py-1 text-sm text-gray-dove no-underline transition-colors duration-300 hover:text-gray-cod"
+              [class.pointer-events-none]="link.href === '#'"
+            >
+              {{ link.label }}
+            </a>
+          }
+        }
+      </div>
+    </div>
+  </div>
+</footer>

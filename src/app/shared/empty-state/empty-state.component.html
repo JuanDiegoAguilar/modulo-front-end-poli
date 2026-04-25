@@ -1,0 +1,13 @@
+<section
+  class="mx-auto flex max-w-md flex-col items-center gap-4 px-6 py-12 text-center sm:px-10"
+>
+  <div
+    class="flex size-20 items-center justify-center rounded-full bg-gray-pampas text-4xl"
+    aria-hidden="true"
+  >
+    {{ emoji() }}
+  </div>
+  <h2 class="font-title text-2xl text-gray-cod sm:text-3xl">{{ title() }}</h2>
+  <p class="text-[0.95rem] leading-relaxed text-gray-dove">{{ message() }}</p>
+  <ng-content />
+</section>

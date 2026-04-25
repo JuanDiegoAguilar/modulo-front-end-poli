@@ -1,0 +1,54 @@
+@if (open()) {
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
+    (click)="onBackdropClick($event)"
+  >
+    <div
+      class="relative flex max-h-[90vh] w-full max-w-lg flex-col overflow-hidden rounded-2xl bg-white shadow-xl"
+      role="dialog"
+      aria-modal="true"
+      (click)="$event.stopPropagation()"
+    >
+      <header
+        class="flex flex-shrink-0 items-center justify-between gap-4 border-b border-gray-cararra px-6 py-4"
+      >
+        <h2 class="font-title text-[1.6rem] leading-tight text-gray-cod">
+          {{ title() }}
+        </h2>
+        <button
+          type="button"
+          class="flex size-8 cursor-pointer items-center justify-center rounded-full text-gray-dusty transition-colors hover:bg-gray-pampas hover:text-gray-cod"
+          aria-label="Cerrar"
+          (click)="closed.emit()"
+        >
+          ✕
+        </button>
+      </header>
+
+      <div class="flex flex-col gap-4 overflow-y-auto p-6">
+        <ng-content />
+      </div>
+
+      @if (showFooter()) {
+        <footer
+          class="flex flex-shrink-0 flex-col-reverse items-stretch justify-end gap-3 border-t border-gray-cararra px-6 py-4 sm:flex-row sm:items-center"
+        >
+          <button
+            type="button"
+            class="inline-flex cursor-pointer items-center justify-center rounded-lg border border-gray-cararra bg-white px-5 py-2 text-sm font-medium text-gray-cod transition-all duration-300 hover:bg-gray-pampas"
+            (click)="closed.emit()"
+          >
+            Cancelar
+          </button>
+          <button
+            type="button"
+            class="inline-flex cursor-pointer items-center justify-center rounded-lg bg-gray-cod px-5 py-2 text-sm font-medium text-white transition-all duration-300 hover:opacity-85"
+            (click)="submitted.emit()"
+          >
+            {{ submitText() }}
+          </button>
+        </footer>
+      }
+    </div>
+  </div>
+}

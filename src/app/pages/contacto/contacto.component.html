@@ -1,0 +1,198 @@
+<main class="page-container">
+  <div
+    class="grid grid-cols-1 items-start gap-12 lg:grid-cols-[1fr_1.3fr] lg:gap-20 animate-fade-up"
+  >
+    <!-- Información de contacto -->
+    <div>
+      <h1
+        class="mb-5 font-title text-[clamp(2rem,4vw,3rem)] font-normal leading-tight tracking-tight text-gray-cod"
+      >
+        Hablemos de tu <em class="not-italic text-blue-royal">proyecto</em>
+      </h1>
+      <p class="mb-12 max-w-[400px] text-base leading-relaxed text-gray-dove">
+        Cuéntanos qué necesitas y nuestro equipo se pondrá en contacto contigo en
+        menos de 24 horas.
+      </p>
+      <div class="flex flex-col gap-5">
+        @for (info of contactInfo; track info.label) {
+          <app-contact-info-card
+            [emoji]="info.emoji"
+            [label]="info.label"
+            [value]="info.value"
+            [bgColor]="info.bgColor"
+          />
+        }
+      </div>
+    </div>
+
+    <!-- Formulario / Success -->
+    <div
+      class="rounded-[20px] border border-gray-cararra bg-white p-6 shadow-[0_4px_20px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.04)] sm:p-10"
+    >
+      @if (!submitted()) {
+        <h2 class="mb-2 text-xl font-semibold text-gray-cod">
+          Envíanos un mensaje
+        </h2>
+        <p class="mb-8 text-sm text-gray-dove">Los campos con * son obligatorios</p>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+          <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+            <div class="flex flex-col gap-1.5">
+              <label
+                for="nombre"
+                class="flex items-center gap-1 text-[13px] font-semibold text-gray-cod"
+              >
+                Nombre <span class="text-red-600">*</span>
+              </label>
+              <input
+                id="nombre"
+                type="text"
+                formControlName="nombre"
+                placeholder="Tu nombre"
+                [class]="inputClasses('nombre')"
+              />
+              @if (showError('nombre')) {
+                <span class="text-xs text-red-600">El nombre es obligatorio.</span>
+              }
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label
+                for="apellido"
+                class="flex items-center gap-1 text-[13px] font-semibold text-gray-cod"
+              >
+                Apellido <span class="text-red-600">*</span>
+              </label>
+              <input
+                id="apellido"
+                type="text"
+                formControlName="apellido"
+                placeholder="Tu apellido"
+                [class]="inputClasses('apellido')"
+              />
+              @if (showError('apellido')) {
+                <span class="text-xs text-red-600">El apellido es obligatorio.</span>
+              }
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label
+                for="email"
+                class="flex items-center gap-1 text-[13px] font-semibold text-gray-cod"
+              >
+                Correo electrónico <span class="text-red-600">*</span>
+              </label>
+              <input
+                id="email"
+                type="email"
+                formControlName="email"
+                placeholder="correo@ejemplo.com"
+                [class]="inputClasses('email')"
+              />
+              @if (showError('email')) {
+                <span class="text-xs text-red-600">
+                  @if (form.controls.email.errors?.['required']) {
+                    El correo es obligatorio.
+                  } @else {
+                    Ingresa un correo válido.
+                  }
+                </span>
+              }
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="telefono" class="text-[13px] font-semibold text-gray-cod">
+                Teléfono
+              </label>
+              <input
+                id="telefono"
+                type="tel"
+                formControlName="telefono"
+                placeholder="+57 300 000 0000"
+                [class]="inputClasses('telefono')"
+              />
+            </div>
+
+            <div class="flex flex-col gap-1.5 md:col-span-2">
+              <label
+                for="servicio"
+                class="flex items-center gap-1 text-[13px] font-semibold text-gray-cod"
+              >
+                Servicio de interés <span class="text-red-600">*</span>
+              </label>
+              <select
+                id="servicio"
+                formControlName="servicio"
+                [class]="inputClasses('servicio') + ' cursor-pointer'"
+              >
+                <option value="">Selecciona un servicio</option>
+                @for (s of services(); track s.id) {
+                  <option [value]="s.id">{{ s.title }}</option>
+                }
+              </select>
+              @if (showError('servicio')) {
+                <span class="text-xs text-red-600">Selecciona un servicio.</span>
+              }
+            </div>
+
+            <div class="flex flex-col gap-1.5 md:col-span-2">
+              <label
+                for="mensaje"
+                class="flex items-center gap-1 text-[13px] font-semibold text-gray-cod"
+              >
+                Mensaje <span class="text-red-600">*</span>
+              </label>
+              <textarea
+                id="mensaje"
+                formControlName="mensaje"
+                rows="4"
+                placeholder="Cuéntanos sobre tu proyecto o necesidad..."
+                [class]="inputClasses('mensaje') + ' min-h-[120px] resize-y'"
+              ></textarea>
+              @if (showError('mensaje')) {
+                <span class="text-xs text-red-600">El mensaje es obligatorio.</span>
+              }
+            </div>
+          </div>
+
+          <div
+            class="mt-7 flex flex-col items-stretch justify-between gap-3 sm:flex-row sm:items-center"
+          >
+            <span class="text-center text-xs text-gray-dusty sm:text-left">
+              Respondemos en menos de 24h
+            </span>
+            <button
+              type="submit"
+              class="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-gray-cod px-8 py-3.5 text-[15px] font-semibold text-white transition-all duration-300 hover:opacity-85 sm:w-auto sm:hover:-translate-y-0.5"
+            >
+              Enviar mensaje
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </form>
+      } @else {
+        <div class="animate-scale-in px-2 py-8 text-center sm:px-6 sm:py-12">
+          <div
+            class="mx-auto mb-6 flex size-18 items-center justify-center rounded-full bg-green-50 text-[2rem] text-green-600"
+          >
+            ✓
+          </div>
+          <h3 class="mb-2 text-[22px] font-semibold text-gray-cod">
+            ¡Mensaje enviado!
+          </h3>
+          <p class="mb-7 text-[15px] text-gray-dove">
+            Gracias por contactarnos. Nuestro equipo revisará tu mensaje y te
+            responderá pronto.
+          </p>
+          <button
+            type="button"
+            class="cursor-pointer rounded-lg border border-gray-cararra bg-gray-pampas px-6 py-3 text-sm font-medium text-gray-cod transition-colors duration-300 hover:bg-gray-cararra/40"
+            (click)="reset()"
+          >
+            Enviar otro mensaje
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+</main>

@@ -1,0 +1,46 @@
+<article
+  class="flex min-h-[350px] flex-col overflow-hidden rounded-2xl border border-gray-cararra bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)]"
+>
+  <div
+    [class]="iconAreaClasses()"
+    class="flex flex-shrink-0 items-center justify-center py-8"
+    style="min-height: 200px;"
+  >
+    <span class="select-none text-5xl leading-none">{{ service().emoji }}</span>
+  </div>
+
+  <div class="flex flex-1 flex-col p-6">
+    <span class="mb-3 text-[.7rem] font-semibold uppercase tracking-wider text-blue-royal">
+      {{ service().category }}
+    </span>
+    <h3 class="mb-2 text-lg font-semibold text-gray-cod">{{ service().title }}</h3>
+    <p class="mb-5 line-clamp-3 flex-1 text-sm leading-relaxed">
+      {{ service().description }}
+    </p>
+
+    <div class="flex items-center justify-between">
+      <button
+        type="button"
+        class="inline-flex cursor-pointer items-center gap-1 text-base font-semibold text-blue-royal transition-opacity hover:opacity-70"
+        (click)="viewDetail.emit(service().id)"
+      >
+        Ver más
+        <span aria-hidden="true" class="leading-none">→</span>
+      </button>
+
+      <button
+        type="button"
+        [class]="favoriteBtnClasses()"
+        [attr.aria-pressed]="isFavorite()"
+        [attr.aria-label]="
+          isFavorite() ? 'Quitar de favoritos' : 'Agregar a favoritos'
+        "
+        (click)="toggleFavorite.emit(service().id)"
+      >
+        <span aria-hidden="true" class="text-base leading-none">
+          {{ isFavorite() ? '♥' : '♡' }}
+        </span>
+      </button>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,184 @@
+<main class="page-container flex flex-col gap-24 sm:gap-32 lg:gap-48">
+  <!-- Hero -->
+  <section class="flex flex-col items-center text-center">
+    <span
+      class="animate-fade-down mb-6 inline-block rounded-full bg-[#F0FDF4] px-4 py-1.5 text-[0.82rem] font-semibold tracking-wide text-blue-royal"
+    >
+      ✦ Plataforma de Servicios Digitales
+    </span>
+    <h1
+      class="animate-fade-down-delay-1 mb-6 max-w-[16ch] font-title text-4xl leading-[1.1] tracking-tight text-gray-cod sm:text-5xl md:text-6xl lg:text-7xl"
+    >
+      Soluciones tecnológicas para tu
+      <span class="italic text-blue-600">negocio</span>
+    </h1>
+    <p
+      class="animate-fade-down-delay-2 mb-10 max-w-[560px] text-base leading-relaxed text-gray-dove sm:text-lg"
+    >
+      Explora nuestro catálogo de servicios digitales. Desde desarrollo de software
+      hasta soporte IT, encuentra la solución perfecta para impulsar tu empresa.
+    </p>
+    <div
+      class="animate-fade-down-delay-3 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center"
+    >
+      <app-button
+        type="primary"
+        routerLink="/servicios"
+        customClass="px-7 py-3.5 text-[0.95rem] font-semibold justify-center"
+      >
+        Explorar servicios <span aria-hidden="true">→</span>
+      </app-button>
+      <app-button
+        type="secondary"
+        routerLink="/contacto"
+        customClass="px-7 py-3.5 text-[0.95rem] font-semibold justify-center"
+      >
+        Contactar equipo
+      </app-button>
+    </div>
+    <div class="animate-fade-down-delay-4 mt-12 flex flex-wrap justify-center gap-8 md:gap-16">
+      @for (stat of stats; track stat.label) {
+        <app-stat [value]="stat.value" [label]="stat.label" />
+      }
+    </div>
+  </section>
+
+  <!-- Servicios destacados -->
+  <section>
+    <div class="mb-12 flex flex-wrap items-end justify-between gap-6">
+      <div>
+        <span
+          class="mb-4 inline-flex items-center gap-2 text-[0.8rem] font-semibold uppercase tracking-wider text-gray-dusty"
+        >
+          <span class="h-0.5 w-5 rounded-sm bg-blue-royal" aria-hidden="true"></span>
+          Catálogo
+        </span>
+        <h2
+          class="mb-3 font-title text-[clamp(1.75rem,4vw,2.8rem)] leading-tight tracking-tight"
+        >
+          Servicios destacados
+        </h2>
+        <p class="max-w-[520px] text-[1rem] leading-relaxed text-gray-dove sm:text-[1.05rem]">
+          Soluciones diseñadas para resolver los desafíos tecnológicos más comunes
+          de las empresas modernas.
+        </p>
+      </div>
+      <app-button
+        type="secondary"
+        routerLink="/servicios"
+        customClass="px-7 py-3.5 text-[0.95rem] font-semibold"
+      >
+        Ver todos <span aria-hidden="true">→</span>
+      </app-button>
+    </div>
+
+    @if (featuredServices().length === 0) {
+      <p class="py-7 text-center font-light text-2xl italic text-gray-dove">
+        No hay servicios disponibles.
+      </p>
+    } @else {
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        @for (svc of featuredServices(); track svc.id) {
+          <app-service-card
+            [service]="svc"
+            [isFavorite]="store.isFavorite(svc.id)"
+            (viewDetail)="goToService($event)"
+            (toggleFavorite)="store.toggleFavorite($event)"
+          />
+        }
+      </div>
+    }
+  </section>
+
+  <!-- Banner ¿Por qué elegir? -->
+  <section
+    class="features-banner flex flex-col items-start gap-10 rounded-[20px] bg-gray-cod p-6 text-white sm:p-10 md:flex-row md:items-center md:gap-12 md:p-16"
+  >
+    <div class="flex-1">
+      <h2 class="mb-4 font-title text-3xl leading-tight tracking-tight sm:text-4xl">
+        ¿Por qué elegir TechNova?
+      </h2>
+      <p class="mb-7 text-base leading-relaxed text-white/65">
+        No solo ofrecemos servicios — construimos alianzas tecnológicas a largo
+        plazo con nuestros clientes.
+      </p>
+      <app-button
+        type="secondary"
+        routerLink="/nosotros"
+        customClass="px-7 py-3.5 text-[0.95rem] font-semibold"
+      >
+        Conocer más <span aria-hidden="true">→</span>
+      </app-button>
+    </div>
+    <div class="grid w-full flex-1 gap-4">
+      @for (feature of features; track feature.title) {
+        <app-feature-card
+          theme="dark"
+          [emoji]="feature.emoji"
+          [title]="feature.title"
+          [description]="feature.description"
+        />
+      }
+    </div>
+  </section>
+
+  <!-- Testimonios -->
+  <section>
+    <div class="mb-12">
+      <span
+        class="mb-4 inline-flex items-center gap-2 text-[0.8rem] font-semibold uppercase tracking-wider text-gray-dusty"
+      >
+        <span class="h-0.5 w-5 rounded-sm bg-blue-royal" aria-hidden="true"></span>
+        Testimonios
+      </span>
+      <h2
+        class="mb-3 font-title text-[clamp(1.75rem,4vw,2.8rem)] leading-tight tracking-tight"
+      >
+        Lo que dicen nuestros clientes
+      </h2>
+      <p class="max-w-[520px] text-[1rem] leading-relaxed text-gray-dove sm:text-[1.05rem]">
+        Historias reales de empresas que transformaron sus procesos con nuestros
+        servicios.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      @for (t of testimonials; track t.name) {
+        <app-testimonial-card
+          [name]="t.name"
+          [role]="t.role"
+          [quote]="t.quote"
+          [initials]="t.initials"
+        />
+      }
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="px-4 py-8 text-center sm:px-8">
+    <h2
+      class="mx-auto mb-4 font-title text-[clamp(1.75rem,4vw,3rem)] leading-tight tracking-tight"
+    >
+      ¿Listo para transformar<br />tu empresa?
+    </h2>
+    <p class="mx-auto mb-8 max-w-[480px] text-[1rem] leading-relaxed text-gray-dove sm:text-[1.05rem]">
+      Agenda una consultoría gratuita y descubre cómo nuestros servicios pueden
+      impulsar tu negocio.
+    </p>
+    <div class="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+      <app-button
+        type="primary"
+        routerLink="/contacto"
+        customClass="px-7 py-3.5 text-[0.95rem] font-semibold justify-center"
+      >
+        Agendar consultoría <span aria-hidden="true">→</span>
+      </app-button>
+      <app-button
+        type="secondary"
+        routerLink="/servicios"
+        customClass="px-7 py-3.5 text-[0.95rem] font-semibold justify-center"
+      >
+        Ver servicios
+      </app-button>
+    </div>
+  </section>
+</main>

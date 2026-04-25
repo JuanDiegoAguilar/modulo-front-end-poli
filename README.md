@@ -1,72 +1,89 @@
-# Proyecto para entrega módulo Front End - TechNova
+# Proyecto para entrega módulo Front End — TechNova
 
 TechNova simula una plataforma empresarial de servicios tecnológicos donde los usuarios pueden explorar, gestionar y guardar como favoritos distintos servicios digitales.
 
-## Información importante
+> Esta versión está construida con **Angular 21** + **Tailwind CSS v4** + persistencia en `localStorage`. La versión anterior (HTML + JS + Web Components) queda archivada en [`legacy/`](./legacy) como referencia.
 
-El proyecto utiliza **Web Components** (`customElements.define`) que es nativo de JS con el objetivo de encapsular y reutilizar elementos comunes en todas las páginas teniendo en cuenta que no se está utilizando ningún framework.
+## Tecnologías
 
-Adicionalmente, para que los componentes se compartan de forma global, se importan una única vez en `src/main.js` y quedan disponibles en cualquier página que lo incluya, esto mediante el uso de módulos (`<script type="module">`). Teniendo en cuenta lo anterior, es importante que el proyecto se ejecute desde un servidor local (ej. Live Server en VS Code) para evitar problemas al cargar los módulos.
+| Tecnología                                        | Uso                                              |
+| ------------------------------------------------- | ------------------------------------------------ |
+| [Angular](https://angular.dev/) 21 (standalone)   | Framework SPA, signals para estado, lazy routes  |
+| [Reactive Forms](https://angular.dev/guide/forms) | Validación del formulario de contacto y modal    |
+| [Tailwind CSS v4](https://tailwindcss.com/)       | Utilidades de estilos con tokens `@theme`        |
+| `localStorage`                                    | Persistencia de servicios y favoritos            |
+| Google Fonts                                      | Tipografías _DM Sans_ e _Instrument Serif_       |
 
-## Paso a paso para ejecutar en un servidor local
+## Cómo correr el proyecto
 
-La forma más sencilla es usar la extensión **Live Server** de VS Code.
+### Requisitos previos
 
-### Paso a paso
+- [Node.js](https://nodejs.org/) ≥ 20
+- npm ≥ 10
 
-**1. Abrir el proyecto en VS Code**
+### Pasos
 
 ```bash
-# Clonar el repositorio
+# 1. Clonar el repositorio
 git clone https://github.com/JuanDiegoAguilar/modulo-front-end-poli.git
+cd modulo-front-end-poli
+
+# 2. Instalar dependencias
+npm install
+
+# 3. Servidor de desarrollo (http://localhost:4200)
+npm start
+
+# Otros comandos disponibles
+npm run build       # build de producción a dist/technova
+npm run watch       # build de desarrollo con --watch
+npm test            # tests con Vitest
 ```
-
-Abrir VS Code y presionar en: `Archivo → Abrir carpeta…` y selecciona la raíz del proyecto.
-
-**2. Instalar la extensión Live Server**
-
-- Ir a la pestaña de **Extensiones**
-- Buscar **Live Server** - [Link marketplace](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
-- Hacer clic en **Instalar**
-
-**3. Lanzar el servidor**
-
-Con el proyecto abierto, hacer clic en el botón **Go Live** que aparece en la barra de estado inferior de VS Code (esquina inferior derecha).
-
-> **Alternativa:** hacer clic derecho sobre `index.html` en el explorador de archivos y seleccionar _"Open with Live Server"_.
-
-## Tecnologías utilizadas
-
-| Tecnología                                        | Uso                                             |
-| ------------------------------------------------- | ----------------------------------------------- |
-| HTML5 / CSS3                                      | Estructura y estilos                            |
-| JavaScript (ES Modules)                           | Lógica de renderizado e interacción del cliente |
-| [Tailwind CSS v4](https://tailwindcss.com/) (CDN) | Utilidades de estilos                           |
-| Web Components                                    | Componentes reutilizables                       |
-| `localStorage`                                    | Persistencia de servicios y favoritos           |
-| Google Fonts                                      | Tipografías _DM Sans_ e _Instrument Serif_      |
 
 ## Estructura del proyecto
 
 ```
 modulo-front-end-poli/
-├── index.html
-├── tailwind.config.js
-├── pages/
-└── src/
-    ├── main.js                 # Importa componentes y estilos globales de Tailwind
-    ├── style.css               # Estilos base
-    ├── components/             # Web Components reutilizables
-    │   ├── navbar.js           # <app-navbar>
-    │   ├── button.js           # <app-button>
-    │   ├── footer.js           # <app-footer>
-    │   └── modal.js            # <app-modal>
-    ├── css/                    # Estilos específicos por página
-    ├── js/                     # Lógica por página
-    │   └── utils/
-    │       └── store.js        # Almacenamiento con localStorage
-    ├── data/
-    │   ├── default-services.js # Datos de servicios por defecto
-    │   └── nav-links.js        # Enlaces de navegación
-    └── assets/                 # Íconos e imágenes
+├── src/
+│   ├── index.html                     # Inyecta Google Fonts y monta <app-root>
+│   ├── main.ts                        # bootstrapApplication
+│   ├── styles.css                     # @import "tailwindcss" + @theme con tokens del diseño
+│   └── app/
+│       ├── app.ts                     # Componente raíz (navbar + outlet + footer)
+│       ├── app.routes.ts              # Rutas: /, /servicios(/:id), /favoritos, /contacto, /nosotros
+│       ├── core/
+│       │   ├── models/                # Interfaz Service
+│       │   ├── data/                  # Catálogo por defecto, categorías, colores
+│       │   └── services/              # StorageService + ServicesStore (signals)
+│       ├── shared/                    # Componentes reutilizables
+│       │   ├── button/                # <app-button> con variantes primary/secondary/ghost
+│       │   ├── navbar/                # Sticky + hamburguesa móvil + RouterLinkActive
+│       │   ├── footer/                # 4 columnas, responsive
+│       │   ├── service-card/          # Card de servicio con favorito y "Ver más"
+│       │   ├── testimonial-card/
+│       │   ├── feature-card/          # variants light/dark
+│       │   ├── stat/
+│       │   ├── contact-info-card/
+│       │   ├── empty-state/
+│       │   └── modal/                 # Dialog con backdrop, esc to close, scroll lock
+│       └── pages/
+│           ├── inicio/                # Home: hero + destacados + banner + testimonios + CTA
+│           ├── nosotros/              # Misión, visión, valores, banner confianza
+│           ├── servicios/
+│           │   ├── servicios.component.ts        # Grid + filtros + búsqueda con debounce
+│           │   ├── service-detail/               # Ruta hija /servicios/:id
+│           │   └── add-service-modal/            # Reactive Form + FormArray + custom validator
+│           ├── favoritos/             # Listado + empty state + animación al borrar
+│           └── contacto/              # Reactive Form con required + email + success view
+├── postcss.config.json                # @tailwindcss/postcss para Tailwind v4
+├── angular.json
+├── package.json
+└── legacy/                            # Versión anterior (HTML + JS + Web Components) como referencia
 ```
+
+## Notas técnicas
+
+- **Persistencia**: el `ServicesStore` lee `technova_services` y `technova_favorites` de `localStorage` al inicializar. Los datos se mantienen entre sesiones.
+- **Routing del detalle**: `/servicios/:id` usa una ruta hija. Si el id no existe (porque se borró el servicio), redirige automáticamente a `/servicios`.
+- **Responsive design**: todas las páginas se adaptan a móvil (375px), tablet (768px) y desktop (1280px). El navbar usa hamburguesa por debajo de `md`.
+- **Validación**: el formulario de contacto usa `Validators.required`, `Validators.email` y un validador custom `trimmedRequired`. El modal de creación añade un validador de grupo para garantizar que se seleccione al menos una modalidad.
